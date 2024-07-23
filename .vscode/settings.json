@@ -1,0 +1,33 @@
+{
+  "i18n-ally.localesPaths": "public/locales",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#03569f",
+    "activityBar.background": "#03569f",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#fb2496",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#03569f",
+    "statusBar.background": "#023b6d",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#03569f",
+    "statusBarItem.remoteBackground": "#023b6d",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#023b6d",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#023b6d99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#023B6D",
+  "i18n-ally.keystyle": "nested",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never",
+    "source.fixAll": "explicit"
+  },
+  "editor.tabSize": 2,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
