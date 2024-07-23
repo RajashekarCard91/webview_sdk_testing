@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    window.addEventListener(
+            "message",
+            (e) => {
+              console.log("e,", e);
+              if (e.data.type === "C91_ISSUE_CARD_SCREEN_INITIALISED") {
+                txnPage();
+              }
+            },
+            false,
+          );
+    // window.addEventListener('message', message => {
+    //   console.log(message);
+    // });
+
+    function txnPage() {
+      try {
+        var ORIGIN = "http://localhost:3000";
+        var params = {
+          "payload": {
+            // organizationId: "240704112940873ID1OID2821568",// Org Id - DEV
+            organizationId: "230526135544169ID1OID4070270",// Org Id - Prod Sand
+            // cardProgramId: "240705052756978ID1CP5395184", // Card program Id - DEV
+            cardProgramId: "230511045323298ID1CP8840497", // - Prod Sand
+            uniqueId: "u0A8oiVTv3Y81y8QGn5uEx2CaEmo4xKL/tdOFdarg4o=", // Unique id - Prod Sand
+            authUrl: `https://integrations.card91.io/api:3aL900Rl/auth/token`, // Auth web hook needs to created please refer Auth URL Config Documentation - DEV
+            // authUrl: `https://integrations.card91.io/api:Srfx-bxR/auth/token_0?x-data-source=test`, // - Prod Sand
+            cardMode: 'PHYSICAL_NAMED_CARD',//PHYSICAL_NAMED_CARD, DIGITAL_ONLY_CARD
+            customFields: {
+              "step1": [ // Step define different pages for issue card form
+                {
+                  "name": "fullName",
+                  "displayText": "Full Name",
+                  "elements": {
+                    "type": "text",
+                    "defaultValue": "Old Card",
+                    "disabled": true // For making the non editable field pass the value as true 
+                  }
+                },
+                {
+                  "name": "mobile",
+                  "displayText": "Mobile No.",
+                  "elements": {
+                    "type": "text",
+                    "defaultValue": "919001333222",
+                    "disabled": true // For making the non editable field pass the value as true 
+                  }
+                },
+                {
+                  "name": "pan",
+                  "displayText": "PAN",
+                  "elements": {
+                    "type": "text",
+                    "defaultValue": "HIYPS8277G",
+                    "disabled": true // For making the non editable field pass the value as true 
+                  }
+                },
+                {
+                  "name": "nameOnCard",
+                  "displayText": "Name on card",
+                  "elements": {
+                    "type": "text",
+                    "defaultValue": "Old Card",
+                    "disabled": true // For making the non editable field pass the value as true 
+                  }
+                },
+                {
+                  "name": "pinMailer",
+                  "displayText": "PIN Mailer",
+                  "elements": {
+                    "type": "checkbox",
+                    "defaultValue": true,
+                    "disabled": false // For making the non editable field pass the value as true 
+                  }
+                }
+              ]
+            }
+          },
+          "type": "C91_ISSUE_CARD_SET_PARAMS"
+        }
+        document.getElementById("issue-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    function gotoStep(step) {
+      var ORIGIN = "http://localhost:3000";
+      var params = {
+        "payload": {
+          "step": step
+        },
+        "type": "C91_ISSUE_CARD_SET_FORM_STEP"
+      }
+      document.getElementById("issue-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+
+    }
+    function onSubmit() {
+      var ORIGIN = "http://localhost:3000";
+      var params = {
+        "payload": null,
+        "type": "C91_ISSUE_CARD_SET_SUBMIT"
+      }
+      document.getElementById("issue-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+
+    }
+
+  </script>
+  <iframe onLoad="txnPage()" src="http://localhost:3000/issue-card?templateId=xoltt&platform=ios" frameborder="0"
+    allow="midi" id="issue-card-page"></iframe>
+  <div>
+    <button type="button" id="step-1" onclick="gotoStep('step1')"> Step1</button>
+    <button type="button" onclick="gotoStep('step2')">Step2</button> 
+    <button type="button" onclick="gotoStep('step3')">Step3</button>
+    <button type="button" onclick="gotoStep('step4')">Step4</button>
+    <button type="button" onclick="onSubmit()">Submit</button> 
+
+  </div>
+  </div>
+</body>
+
+</html>

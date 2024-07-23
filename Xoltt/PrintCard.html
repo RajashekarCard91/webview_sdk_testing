@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    // document.addEventListener("message",
+    //         (e) => {
+    //           console.log("e,", e);
+    //           if (e.data.type === "C91_PRINT_CARD_SCREEN_INITIALISED") {
+    //             printPage();
+    //           }
+    //         },
+    //         false,
+    //       );
+    // const childWindow = document.getElementById('print-card-page').contentWindow;
+    // window.addEventListener('message', message => {
+    //   console.log(message);
+    // });
+    window.addEventListener(
+            "message",
+            (e) => {
+              console.log("e,", e);
+              if (e.data.type === "C91_PRINT_CARD_SCREEN_INITIALISED") {
+                printPage();
+              }
+            },
+            false,
+          );
+    function printPage() {
+      try {
+        
+        var ORIGIN = "http://localhost:3000";
+        var params = {
+          "payload": {
+            /* Stag Sandbox*/
+            organizationId: "240704112940873ID1OID2821568", // Organization Id
+            cardId: "240715124156373ID1CP7749980", // Card program ID
+            customerId: "240717104651321ID1CUSTID4811276", // Card holder customer id
+            uniqueId: "u0A8oiVTv3Y81y8QGn5uEx2CaEmo4xKL/tdOFdarg4o=",
+            mobile: "919900990011", /// card holder mobile number 
+            authUrl: "https://integrations.card91.io/api:Srfx-bxR/auth/token_0?x-data-source=test", // this API is take care of client=transasia or some. Our testing purpose created Xano API for business SDK token. 
+            pinMailer:false
+          },
+          "type": "C91_PRINT_CARD_SET_PARAMS"
+        }
+        document.getElementById("print-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+  </script>
+  <iframe src="http://localhost:3000/print-card?templateId=xoltt&platform=ios"
+    frameborder="0" allow="midi" id="print-card-page"></iframe>
+  <div>
+
+  </div>
+  </div>
+</body>
+
+</html>

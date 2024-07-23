@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+      document.addEventListener("message",
+      (e) => {
+        console.log("e,", e);
+         if (e.data.type === "C91_MIN_KYC_INITIALISED") {
+                minKYCPage();
+            }
+           },
+          false,
+        );
+    const childWindow = document.getElementById('nsdl-min-kyc-page').contentWindow;
+    window.addEventListener('message', message => {
+      debugger
+      console.log(message);
+    });
+    function minKYCPage() {
+      try {
+        var ORIGIN = "https://card-webview.qa.card91.in";
+        var params = {
+          "payload": {
+            mobile: "918630557139", // Card holder mobile number whose KYC needs to be done
+          },
+          "type": "C91_MIN_KYC_SET_PARAMS"
+        }
+        document.getElementById("nsdl-min-kyc-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+
+  </script>
+  <iframe src="https://card-webview.qa.card91.in/min-kyc/nsdl?templateId=xoltt&platform=ios"
+    frameborder="0" allow="midi" id="nsdl-min-kyc-page"></iframe>
+  <div>
+
+
+  </div>
+  </div>
+</body>
+
+</html>

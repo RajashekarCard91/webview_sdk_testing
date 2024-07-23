@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>card91</title>
+ <style>
+   .container {
+     position: relative;
+     background: url('./card-default.png') no-repeat;
+     background-size: 328px 208px;
+     height: 208px;
+     width: 328px;
+   }
+ 
+   .cardWrapper {
+     height: 208px;
+     width: 328px;
+     background: transparent;
+   }
+ 
+   iframe {
+     height: 100%;
+     width: 100%;
+   }
+ </style>
+</head>
+<body>
+ <div class="container">
+   <div class="cardWrapper">
+     <script>
+    	 window.addEventListener(
+            "message",
+            (e) => {
+              console.log("e,", e);
+              if (e.data.type === "C91_CARD_VIEWER_INITIALISED") {
+                cardView();
+              }
+            },
+            false,
+          );
+       function cardView() {
+         try {
+           var ORIGIN = "http://localhost:3000";  
+           var params = {
+             "payload": {
+               "cardHolderName": "xxxxxxx",
+               "cardId": "240702112036567ID1CARD7065424",
+               "customerId": "240702112036524ID1CUSTID6991864",
+               "last4digits": "8714",
+               "token": "C91IP_PS5Z1glreY/whmVq/UHUGSVRQ3ASw4A01wW6lLTN+d0="
+             },
+             "type": "C91_CARD_SET_PARAMS"
+           }
+           document.getElementById("cardView").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+         } catch (error) {
+             console.log(error);
+         }
+       }
+     </script>
+     <iframe src="http://localhost:3000/view-card?templateId=xoltt&platform=ios"
+       frameborder="0" id="cardView"></iframe>
+   </div>
+ </div>
+</body>
+</html>

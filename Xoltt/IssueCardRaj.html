@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    window.addEventListener(
+            "message",
+            (e) => {
+              console.log("e,", e);
+              if (e.data.type === "C91_ISSUE_CARD_SCREEN_INITIALISED") {
+                txnPage();
+              }
+            },
+            false,
+          );
+    // window.addEventListener('message', message => {
+    //   console.log(message);
+    // });
+
+    function txnPage() {
+      try {
+        var ORIGIN = "http://localhost:3000";
+        var params = {
+          "payload": {
+            organizationId: "240715064222573ID1OID2597970",// Org Id
+            cardProgramId: "240715094331238ID1CARD9683792", // Card program Id
+            uniqueId: "string12321ewqw13", // Unique id
+            authUrl: `https://integrations.card91.io/api:3aL900Rl/auth/token`, // Auth web hook needs to created please refer Auth URL Config Documentation
+            cardMode: 'DIGITAL_ONLY_CARD',
+            customFields: {
+              "step1": [ // Step define different pages for issue card form
+                {
+                  "name": "fullName",
+                  "displayText": "Full Name",
+                  "elements": {
+                    "type": "text",
+                    "defaultValue": "Raj",
+                    "disabled": true // For making the non editable field pass the value as true 
+                  }
+                },
+                {
+                  "name": "mobile",
+                  "displayText": "Mobile No.",
+                  "elements": {
+                    "type": "text",
+                    "defaultValue": "8106384398",
+                    "disabled": true // For making the non editable field pass the value as true 
+                  }
+                },
+                {
+                  "name": "pan",
+                  "displayText": "PAN",
+                  "elements": {
+                    "type": "text",
+                    "defaultValue": "HIYPS8243G",
+                    "disabled": true // For making the non editable field pass the value as true 
+                  }
+                },
+                {
+                  "name": "nameOnCard",
+                  "displayText": "Name on card",
+                  "elements": {
+                    "type": "text",
+                    "defaultValue": "Dk Thakur",
+                    "disabled": true // For making the non editable field pass the value as true 
+                  }
+                },
+                {
+                  "name": "pinMailer",
+                  "displayText": "PIN Mailer",
+                  "elements": {
+                    "type": "checkbox",
+                    "defaultValue": true,
+                    "disabled": false // For making the non editable field pass the value as true 
+                  }
+                }
+              ]
+            }
+          },
+          "type": "C91_ISSUE_CARD_SET_PARAMS"
+        }
+        document.getElementById("issue-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    function gotoStep(step) {
+      var ORIGIN = "http://localhost:3000";
+      var params = {
+        "payload": {
+          "step": step
+        },
+        "type": "C91_ISSUE_CARD_SET_FORM_STEP"
+      }
+      document.getElementById("issue-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+
+    }
+    function onSubmit() {
+      var ORIGIN = "http://localhost:3000";
+      var params = {
+        "payload": null,
+        "type": "C91_ISSUE_CARD_SET_SUBMIT"
+      }
+      document.getElementById("issue-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+
+    }
+
+  </script>
+  <iframe onLoad="txnPage()" src="http://localhost:3000/issue-card?templateId=xoltt&platform=ios" frameborder="0"
+    allow="midi" id="issue-card-page"></iframe>
+  <div>
+    <button type="button" id="step-1" onclick="gotoStep('step1')"> Step1</button>
+    <button type="button" onclick="gotoStep('step2')">Step2</button> // If wants to move to next step if multiple steps and defined on custom field json object
+    <button type="button" onclick="gotoStep('step3')">Step3</button>
+    <button type="button" onclick="gotoStep('step4')">Step4</button>
+    <button type="button" onclick="onSubmit()">Submit</button> // When user wants to submit the filled form for issue card
+
+  </div>
+  </div>
+</body>
+
+</html>

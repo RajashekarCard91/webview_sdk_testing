@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>card91</title>
+    <style>
+        iframe {
+            height: 1200px;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+      window.addEventListener(
+            "message",
+            (e) => {
+              console.log("e,", e);
+              if (e.data.type === "C91_TXN_SCREEN_INITIALISED") {
+                txnPage();
+              }
+            //   if (e.data.type === "c91_TXN_SHARE_DETAILS_SUCCESS") {
+            //     console.log("Client received txn details",e.data.payload);
+            //   }
+            },
+            false,
+          );
+        function txnPage() {
+            try {
+                var ORIGIN = "http://localhost:3000";
+                var params = {
+                    "payload": {
+                        "cardId": "240702112036567ID1CARD7065424",
+                        "token": "C91IP_09ACfm0rpBv0+YTtR67j2/4Qdd8AFGtd5U1qfq5/w/0=",
+                        "pettyCash":true
+                        
+                    },
+                    "type": "C91_TXN_SET_PARAMS"
+                }
+                document.getElementById("txnPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    </script>
+    <iframe  src=" http://localhost:3000/transactions?templateId=zaggle&platform=ios"
+        frameborder="0" allow="midi" id="txnPage"></iframe>
+    </div>
+</body>
+
+</html>
