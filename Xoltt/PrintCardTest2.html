@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    
+    window.addEventListener(
+            "message",
+            (e) => {
+              console.log("e,", e);
+              if (e.data.type === "C91_PRINT_CARD_SCREEN_INITIALISED") {
+                printPage();
+              }
+            },
+            false,
+          );
+    function printPage() {
+      try {
+        
+        var ORIGIN = "https://card-webview.dev.card91.in";
+        var params = {
+          "payload": {
+            /* Stag Sandbox*/
+            organizationId: "240716072500816ID1OID3532272", // Organization Id
+            cardId: "240724054537756ID1CP5022487", // Card program ID
+            customerId: "240712072921661ID1CUSTID8070700", // Card holder customer id
+            uniqueId: "/vNgIcQ8g2E2BfKLymiMh7xIvlXIE4qUhChc/8LZzCOftTTMcmRUo9AGiQ9A4f/0kFJTWfQNOhHlexsLMR9Npw==",
+            mobile: "918016703737", /// card holder mobile number 
+            authUrl: "https://integrations.card91.io/api:Srfx-bxR/auth/token_0?x-data-source=test", // this API is take care of client=transasia or some. Our testing purpose created Xano API for business SDK token. 
+            pinMailer:false
+          },
+          "type": "C91_PRINT_CARD_SET_PARAMS"
+        }
+        document.getElementById("print-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+  </script>
+  <iframe src="https://card-webview.dev.card91.in/print-card?templateId=xoltt&platform=ios"
+    frameborder="0" allow="midi" id="print-card-page"></iframe>
+  <div>
+
+  </div>
+  </div>
+</body>
+
+</html>
