@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>card91</title>
- <style>
-    body{
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>card91</title>
+    <style>
+      body {
         background-color: rgb(171, 170, 170);
-    }
-   .container {
-     position: relative;
-     background: url('./FYP-image-full.png') no-repeat; 
-     background-size: 239px 407px;
-     background-position: center center; 
-     height: 407px;
-     width: 239px;
-     /* border: 1px solid gray; */
-     /* background-color: gray; */
-   }
- 
-   .cardWrapper {
-    height: 407px;
-     width: 239px;
-     background: transparent;
-     /* border: 1px solid red; */
-   }
- 
-   iframe {
-     height: 100%;
-     width: 100%;
-     /* border: 1px solid red; */
-   }
- </style>
-</head>
-<body>
- <div class="container">
-   <div class="cardWrapper">
-     <script>
-    	 window.addEventListener(
+      }
+      .container {
+        position: relative;
+        background: url("./FYP-image-full.png") no-repeat;
+        background-size: 239px 407px;
+        background-position: center center;
+        height: 407px;
+        width: 239px;
+        /* border: 1px solid gray; */
+        /* background-color: gray; */
+      }
+
+      .cardWrapper {
+        height: 407px;
+        width: 239px;
+        background: transparent;
+        /* border: 1px solid red; */
+      }
+
+      iframe {
+        height: 100%;
+        width: 100%;
+        /* border: 1px solid red; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="cardWrapper">
+        <script>
+          window.addEventListener(
             "message",
             (e) => {
               console.log("e,", e);
@@ -46,44 +46,49 @@
                 cardView();
               }
             },
-            false,
+            false
           );
-       function cardView() {
-         try {
-           var ORIGIN = "https://card-webview.qa.card91.in";  
-           var params = {
-             "payload": {
-               "cardHolderName": "Evie Frye",
-               "cardId": "240624111000385ID1CARD0416435",
-               "customerId": "240624111000295ID1CUSTID2034580",
-               "last4digits": "0004",
-               "token": "C91IP_twsCYEIRkuwiun/kDE3TZLHzAjneQfnAB5TXRafjbLo="
-             },
-             "type": "C91_CARD_SET_PARAMS"
-           }
-           document.getElementById("cardView").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
-         } catch (error) {
-             console.log(error);
-         }
-       }
-     </script>
-     <iframe src="https://card-webview.qa.card91.in/view-card?templateId=FYP&platform=ios"
-       frameborder="0" id="cardView"></iframe>
-       <!-- <iframe src="http://localhost:3000/view-card?templateId=zaggle&platform=ios"
+          function cardView() {
+            try {
+              var ORIGIN = "https://card-webview.qa.card91.in";
+              var params = {
+                payload: {
+                  cardHolderName: "Evie Frye",
+                  cardId: "240624111000385ID1CARD0416435",
+                  customerId: "240624111000295ID1CUSTID2034580",
+                  last4digits: "0004",
+                  token: "C91IP_twsCYEIRkuwiun/kDE3TZLHzAjneQfnAB5TXRafjbLo=",
+                },
+                type: "C91_CARD_SET_PARAMS",
+              };
+              document
+                .getElementById("cardView")
+                .contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        </script>
+        <iframe
+          src="https://card-webview.qa.card91.in/view-card?templateId=FYP&platform=ios"
+          frameborder="0"
+          id="cardView"
+        ></iframe>
+        <!-- <iframe src="http://localhost:3000/view-card?templateId=zaggle&platform=ios"
        frameborder="0" id="cardView"></iframe> -->
-       <!-- <iframe src="http://localhost:3000/view-card?templateId=yolo&platform=ios"
+        <!-- <iframe src="http://localhost:3000/view-card?templateId=yolo&platform=ios"
        frameborder="0" id="cardView"></iframe> -->
-       <!-- <iframe src="http://localhost:3000/view-card?templateId=transasia&platform=ios"
+        <!-- <iframe src="http://localhost:3000/view-card?templateId=transasia&platform=ios"
        frameborder="0" id="cardView"></iframe> -->
-       <!-- <iframe src="http://localhost:3000/view-card?templateId=nupay&platform=ios"
+        <!-- <iframe src="http://localhost:3000/view-card?templateId=nupay&platform=ios"
        frameborder="0" id="cardView"></iframe> -->
-       <!-- <iframe src="http://localhost:3000/view-card?templateId=dvaraMoney&platform=ios"
+        <!-- <iframe src="http://localhost:3000/view-card?templateId=dvaraMoney&platform=ios"
        frameborder="0" id="cardView"></iframe> -->
-       <!-- <iframe src="http://localhost:3000/view-card?templateId=xoltt&platform=ios"
+        <!-- <iframe src="http://localhost:3000/view-card?templateId=xoltt&platform=ios"
        frameborder="0" id="cardView"></iframe> -->
-       <!-- <iframe src="http://localhost:3000/view-card?templateId=xolttAED&platform=ios"
+        <!-- <iframe src="http://localhost:3000/view-card?templateId=xolttAED&platform=ios"
        frameborder="0" id="cardView"></iframe> -->
-   </div>
- </div>
-</body>
+      </div>
+    </div>
+  </body>
 </html>
