@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 1200px;
+      width: 100%;
+    }
+
+    .container {
+      position: relative;
+      background: url('./balance_bg.gif') no-repeat;
+      background-size: 100% 160px;
+      height: 160px;
+      width: 100%;
+    }
+
+    .cardWrapper {
+      height: 160px;
+      width: 100%;
+      background: transparent;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+     window.addEventListener("message",
+      (e) => {
+        console.log("e,", e);
+         if (e.data.type === "C91_WALLET_SCREEN_INITIALISED") {
+                walletPage();
+            }
+           },
+          false,
+        );
+    function walletPage() {
+      try {
+        var ORIGIN = "http://localhost:3000";
+
+        var params = {
+          "payload": {
+            "cardId": "240725123531354ID1CARD4292856", //Card holder card id
+            "token": "C91IP_eOrAgOAujHYbe8M0LggQLKSlU5jARUz9Be9JSyep5MA=" ///card holder auth token
+          },
+          "type": "C91_WALLET_SET_PARAMS" // Event type
+        }
+        document.getElementById("walletPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+  <div class="container">
+    <div class="cardWrapper">
+      <iframe src="http://localhost:3000/wallets?templateId=xoltt&platform=ios"
+        frameborder="0" allow="midi" id="walletPage"></iframe>
+    </div>
+  </div>
+
+  </div>
+</body>
+
+</html>
