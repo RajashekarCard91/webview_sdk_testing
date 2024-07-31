@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    .container {
+      position: relative;
+      background: url('./bulkpe.png') no-repeat;
+      background: url('./bulkPeback.png') no-repeat;
+      background-size: 328px 208px;
+      height: 208px;
+      width: 328px;
+    }
+
+    .cardWrapper {
+      height: 208px;
+      width: 328px;
+      background: transparent;
+    }
+
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="cardWrapper">
+      <script>
+        document.addEventListener("message", message => {
+          console.log(message);
+        });
+        const childWindow = document.getElementById('cardView').contentWindow;
+        window.addEventListener('message', message => {
+          console.log(message);
+        });
+        function cardView() {
+          try {
+            var ORIGIN = "https://card-webview.sb.stag.card91.in";
+            var params = {
+              "payload": {
+                // "cardHolderName": "DevapurisadsdsdasdasVenkat",
+                // "cardHolderName": "Devapuri Venkata Sathya sai",
+                "cardHolderName": "Reviewer",
+                // "cardId": "230727093553112ID1CARD7842378",
+                // "customerId": "230727093553064ID1CUSTID2761366",
+                // "last4digits": "7049",
+                // "token": "C91CHOWzf81CiSpYA5WWneMSLCwnGn9sDUsoIWFTjSE3TKjM="
+                // "cardHolderName": "Digital Card",
+                "customerId": "231005071928438ID1CUSTID1213857  ",
+                "cardId": "231005071928870ID1CARD4673154",
+                "last4digits": "7494",
+                "token": "C91CHUJ18U4srmAklRhRTnHtljC3HJBrwmwR74kIgVRSKLNA="
+              },
+              "type": "C91_CARD_SET_PARAMS"
+            }
+            document.getElementById("cardView").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+          } catch (error) {
+            console.log(error);
+          }
+
+        }
+      </script>
+      <iframe onLoad="cardView()" src="https://card-webview.sb.stag.card91.in/view-card?templateId=bulkPe&platform=ios" frameborder="0"
+        id="cardView"></iframe>
+
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    document.addEventListener("message", message => {
+      console.log(message);
+    });
+    const childWindow = document.getElementById('print-card-page').contentWindow;
+    window.addEventListener('message', message => {
+      debugger
+      console.log(message);
+    });
+    function txnPage() {
+      try {
+        var ORIGIN = "http://localhost:3002";
+        var params = {
+          "payload": {
+            organizationId: "230526135544169ID1OID4070270",
+            cardId: "231103110138300ID1CARD6005644",
+            customerId: "231103110138220ID1CUSTID0203225",
+            uniqueId: "string",
+            mobile: "917016803768",
+            authUrl: `https://integrations.card91.io/api:3aL900Rl/auth/token`,
+          },
+          "type": "C91_PRINT_CARD_SET_PARAMS"
+        }
+        document.getElementById("print-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    function onSubmit() {
+      var ORIGIN = "http://localhost:3002";
+      var params = {
+        "payload": null,
+        "type": "C91_PRINT_CARD_SET_SUBMIT"
+      }
+      document.getElementById("print-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+
+    }
+
+  </script>
+  <iframe onLoad="txnPage()" src="http://localhost:3002/print-card?templateId=xoltt&platform=ios" frameborder="0"
+    allow="midi" id="print-card-page"></iframe>
+  <div>
+    <button type="button" onclick="onSubmit()">Submit</button>
+
+  </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html <html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 700px;
+      ;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    function resetPin() {
+      try {
+        // 
+        var ORIGIN = "http://localhost:3000";
+        var params = {
+          "payload": {
+            "phoneNumber": "919876987414",
+            "cardId": "240509050811845ID1CARD3461000",
+            "token": "C91CHOaGfz3qOTGA2OxgUlFvopAem52twSKVCMNnT5ItZ74I="
+            // "cardId": "1234567890",
+            // "phoneNumber": "919871604400",
+            // "token": "C91IP_ionfXKkug2FcYerA0EccBDleLJ0t4b47AwZ9Ud2FTrQ=1",
+          },
+          "type": "C91_RESET_PIN_SET_PARAMS"
+        }
+        document.getElementById("restPin").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+  <iframe onLoad="resetPin()" src="http://localhost:3000/reset-pin?templateId=paulMerchant&platform=ios" frameborder="0"
+    id="restPin"></iframe>
+</body>
+
+</html>

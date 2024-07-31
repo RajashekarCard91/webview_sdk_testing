@@ -1,0 +1,40 @@
+<!DOCTYPE html <html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    function resetPin() {
+      try {
+        var ORIGIN = "http://localhost:3000";
+        var params = {
+          "payload": {
+            // "cardId": "220427191821452ID1CARD9119360",
+            "phoneNumber": "918016703737",
+            "cardId": "240308064037425ID1CARD6153744",
+            "token": "C91CHNkxsL0IJIWNYbzEVDZvJUD8NSXGDA+W1ZkdXkwK5jcI=",
+          },
+          "type": "C91_RESET_PIN_SET_PARAMS"
+        }
+        document.getElementById("restPin").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+  <iframe onLoad="resetPin()" src="http://localhost:3000/reset-pin?templateId=yolo&platform=ios" frameborder="0"
+    id="restPin"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 884px;
+      width: 100%;
+      overflow: hidden;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    window.addEventListener(
+      "message",
+      (e) => {
+        console.log("e,", e);
+        if (e.data.type === "C91_TXN_SCREEN_INITIALISED") {
+          txnPage();
+        }
+      },
+      false,
+    );
+    function txnPage() {
+      try {
+        var ORIGIN = "http://localhost:3001";
+        var params = {
+          "payload": {
+            "cardId": "240604105225841ID1CARD9642376",
+            "token": "C91IP_lhZ+IXbnhrcSt4FbtRBMWN/Shc+XWpLW7FzfLUmjT9k=",
+            // cardHolderName: "Test",
+            // phoneNumber: "Test",
+            // last4digits: "Test",
+            // organization: "Test",
+          },
+          "type": "C91_TXN_SET_PARAMS"
+        }
+        document.getElementById("txnPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+  <iframe src="http://localhost:3001/transactions?templateId=xoltt&platform=ios" frameborder="0" allow="midi"
+    id="txnPage"></iframe>
+  </div>
+</body>
+
+</html>

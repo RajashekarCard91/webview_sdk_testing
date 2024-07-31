@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    .container {
+      position: relative;
+      background: url('./dvara.png') no-repeat;
+      background-size: 328px 208px;
+      height: 208px;
+      width: 328px;
+    }
+
+    .cardWrapper {
+      height: 208px;
+      width: 328px;
+      background: transparent;
+    }
+
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="cardWrapper">
+      <script>
+        document.addEventListener("message", message => {
+          console.log(message);
+        });
+        const childWindow = document.getElementById('cardView').contentWindow;
+        window.addEventListener('message', message => {
+          console.log(message);
+        });
+        function cardView() {
+          try {
+            var ORIGIN = "http://app.unokard.com:3001";
+            var params = {
+              "payload": {
+                // "cardHolderName": "DevapurisadsdsdasdasVenkat",
+                // "cardHolderName": "Devapuri Venkata Sathya sai",
+                "cardHolderName": "Rohit Dharaskar",
+                // "cardId": "230727093553112ID1CARD7842378",
+                // "customerId": "230727093553064ID1CUSTID2761366",
+                // "last4digits": "7049",
+                // "token": "C91CHOWzf81CiSpYA5WWneMSLCwnGn9sDUsoIWFTjSE3TKjM="
+                // "cardHolderName": "Digital Card",
+                "customerId": "240527095512499ID1CUSTID1259695",
+                "cardId": "240527095512548ID1CARD2717810",
+                "last4digits": "0588",
+                "token": "C91IP_mXmHIiPO/JGMmY9PfZ0fLfDEwGYatX+FYYVKfsAMp1M="
+              },
+              "type": "C91_CARD_SET_PARAMS"
+            }
+            document.getElementById("cardView").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      </script>
+      <iframe onLoad="cardView()" src="http://app.unokard.com:3001/view-card?templateId=eezib&platform=ios"
+        frameborder="0" id="cardView"></iframe>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 1200px;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    function walletPage() {
+      try {
+        var ORIGIN = "http://localhost:3001";
+        //var ORIGIN = "http://app.unokard.com:3001";
+
+        var params = {
+          "payload": {
+            "cardId": "220131055001269ID1CARD2530414",
+            "token": "C91CHi2vNz5ZzCaYnSMmgqLEAMyWB2BLy3smI6hQoCLutekc= ",
+          },
+          "type": "C91_WALLET_SET_PARAMS"
+        }
+        document.getElementById("walletPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+  <div>
+    <iframe onLoad="walletPage()" src="http://localhost:3001/wallets?templateId=xoltt&platform=ios" frameborder="0"
+      allow="midi" id="walletPage"></iframe>
+  </div>
+  </div>
+</body>
+
+</html>

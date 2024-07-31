@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 1200px;
+      width: 100%;
+    }
+
+    .container {
+      position: relative;
+      background: url('./balance_bg.gif') no-repeat;
+      background-size: 100% 160px;
+      height: 160px;
+      width: 100%;
+    }
+
+    .cardWrapper {
+      height: 140px;
+      width: 100%;
+      background: transparent;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    function walletPage() {
+      try {
+        // var ORIGIN = "http://localhost:3000";
+        var ORIGIN = "https://card-webview.sb.stag.card91.in";
+
+        var params = {
+          "payload": {
+            "cardId": "230821123609804ID1CARD6284620",
+            "token": "C91CH74EHvVPORvB8xkUxFblksMjuQSplpD6u9Opazfs7aqg="
+          },
+          "type": "C91_WALLET_SET_PARAMS"
+        }
+        document.getElementById("walletPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+  <div class="container">
+    <div class="cardWrapper">
+      <iframe onLoad="walletPage()" src="https://card-webview.sb.stag.card91.in/wallets?templateId=rupiya&platform=ios"
+        frameborder="0" allow="midi" id="walletPage"></iframe>
+    </div>
+  </div>
+
+  </div>
+</body>
+
+</html>

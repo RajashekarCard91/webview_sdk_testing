@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    document.addEventListener("message", message => {
+      console.log(message);
+    });
+    const childWindow = document.getElementById('issue-card-page').contentWindow;
+    window.addEventListener('message', message => {
+      console.log(message);
+    });
+    function txnPage() {
+      try {
+        var ORIGIN = "http://localhost:3000";
+        var params = {
+          "payload": {
+            organizationId: "230217024240504ID1OID6864550",
+            cardProgramId: "230824131932428ID1CP1835940",
+            uniqueId: "string",
+            cardMode: 'PHYSICAL_NAMED_CARD',
+
+            authUrl: `https://integrations.card91.io/api:Srfx-bxR/auth/token?x-data-source=test`,
+            // authUrl: 'https://live.haeywa.ai/authurl_card91',
+            "customFields": {
+              step1: [
+                {
+                  name: "fullName",
+                  displayText: "Full Name",
+                  elements: {
+                    type: "text",
+                    defaultValue: "Tet",
+                    disabled: true
+                  },
+                },
+                {
+                  name: "mobile",
+                  displayText: "Mobile No.",
+                  elements: {
+                    type: "text",
+                    defaultValue: "917606046686",
+                    disabled: false
+                  },
+                },
+                {
+                  name: "nameOnCard",
+                  displayText: "Name on card",
+                  elements: {
+                    type: "text",
+                    defaultValue: "testasdnsndasdbsdmnbasmb",
+                    disabled: false
+                  },
+                },
+
+              ],
+            }
+          },
+          "type": "C91_ISSUE_CARD_SET_PARAMS"
+        }
+        document.getElementById("issue-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    function gotoStep(step) {
+      var ORIGIN = "http://localhost:3000";
+      var params = {
+        "payload": {
+          "step": step
+        },
+        "type": "C91_ISSUE_CARD_SET_FORM_STEP"
+      }
+      document.getElementById("issue-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+
+    }
+    function onSubmit() {
+      var ORIGIN = "http://localhost:3000";
+      var params = {
+        "payload": null,
+        "type": "C91_ISSUE_CARD_SET_SUBMIT"
+      }
+      document.getElementById("issue-card-page").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+
+    }
+
+  </script>
+  <iframe onLoad="txnPage()" src="http://localhost:3000/issue-card?templateId=ypay&platform=ios" frameborder="0"
+    allow="midi" id="issue-card-page"></iframe>
+  <div>
+    <button type="button" id="step-1" onclick="gotoStep('step1')"> Step1</button>
+    <button type="button" onclick="gotoStep('step2')">Step2</button>
+    <button type="button" onclick="gotoStep('step3')">Step3</button>
+    <button type="button" onclick="gotoStep('step4')">Step4</button>
+    <button type="button" onclick="onSubmit()">Submit</button>
+
+  </div>
+  </div>
+</body>
+
+</html>

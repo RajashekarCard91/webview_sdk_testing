@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    function txnPage() {
+      try {
+        var ORIGIN = "https://card-webview.sb.stag.card91.in/";
+        var params = {
+          "payload": {
+            "cardId": "231013062200541ID1CARD6172936",
+            "token": "C91CHSzSpyoPObszKAVNkuESxxGouWL1PPZeSnmet1mRVWM4="
+          },
+          "type": "C91_TXN_SET_PARAMS"
+        }
+        document.getElementById("txnPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+  <iframe onLoad="txnPage()" src="https://card-webview.sb.stag.card91.in/transactions?templateId=yolo&platform=ios"
+    frameborder="0" allow="midi" id="txnPage"></iframe>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 800px;
+      width: 100%;
+      overflow: hidden;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+    function statementPage() {
+      try {
+        var ORIGIN = "http://localhost:3000";
+        var params = {
+          "payload": {
+            "cardId": "240227060000202ID1CARD1173031",
+            "token": "C91CHdL/dEtnnFxjphqtRx2BpyvN5F/wFLxZ7zOplLWZ6/Qk=",
+            cardHolderName: "Sagar Prakash Joshi",
+            phoneNumber: "918793593003",
+            last4digits: "1498",
+            organization: "NSDL Test Org",
+            issuer: 'NSDL',
+            cardType: 'GC'
+          },
+          "type": "C91_STATEMENT_SET_PARAMS"
+        }
+        document.getElementById("statementPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+  <iframe onLoad="statementPage()" src="http://localhost:3000/statements?templateId=xoltt&platform=ios" frameborder="0"
+    allow="midi" id="statementPage"></iframe>
+  </div>
+</body>
+
+</html>

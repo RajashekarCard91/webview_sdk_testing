@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    .container {
+      position: relative;
+      background: url('./yolo.png') no-repeat;
+      /* background: blue; */
+      background-size: 246px 397px;
+      height: 397px;
+      width: 246px;
+    }
+
+    .cardWrapper {
+      height: 397px;
+      width: 246px;
+      background: transparent;
+    }
+
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="cardWrapper">
+      <script>
+        document.addEventListener("message", message => {
+          console.log(message);
+        });
+        const childWindow = document.getElementById('cardView').contentWindow;
+        window.addEventListener('message', message => {
+          console.log(message);
+        });
+        function cardView() {
+          try {
+            var ORIGIN = "http://localhost:3000";
+            var params = {
+              "payload": {
+                // "cardHolderName": "DevapurisadsdsdasdasVenkat",
+                // "cardHolderName": "Devapuri Venkata Sathya sai",
+                "cardHolderName": "Rohit Dharaskar",
+                // "cardId": "230727093553112ID1CARD7842378",
+                // "customerId": "230727093553064ID1CUSTID2761366",
+                // "last4digits": "7049",
+                // "token": "C91CHOWzf81CiSpYA5WWneMSLCwnGn9sDUsoIWFTjSE3TKjM="
+                // "cardHolderName": "Digital Card",
+                "customerId": "231227120659439ID1CUSTID4510424",
+                "cardId": "240306110712779ID1CARD5885126",
+                "last4digits": "6653",
+                "token": "C91CHa183EH3/eC300zM9HquRxYo5tXQKsYadSmiIxh3Mcy4="
+              },
+              "type": "C91_CARD_SET_PARAMS"
+            }
+            document.getElementById("cardView").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+          } catch (error) {
+            console.log(error);
+          }
+
+        }
+      </script>
+      <iframe onLoad="cardView()" src="http://localhost:3000/view-card?templateId=yolo&platform=ios" frameborder="0"
+        id="cardView"></iframe>
+
+    </div>
+  </div>
+</body>
+
+</html>

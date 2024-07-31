@@ -1,0 +1,14 @@
+export const config: Config = {
+  stagSandbox: {
+    WEBVIEW_URL: 'https://card-webview.sb.stag.card91.in',
+  },
+  stagLive: {
+    WEBVIEW_URL: 'https://card-webview.stag.card91.in',
+  },
+  sandbox: {
+    WEBVIEW_URL: 'https://card-webview-sandbox.card91.io',
+  },
+  live: {
+    WEBVIEW_URL: 'https://card-webview.card91.io',
+  },
+};

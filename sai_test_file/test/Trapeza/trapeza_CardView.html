@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    .container {
+      position: relative;
+      background: url('./bulkPeback.png') no-repeat;
+      /* background: black; */
+      background-size: 410px 260px;
+      height: 260px;
+      width: 410px;
+    }
+
+    .cardWrapper {
+      height: 260px;
+      width: 410px;
+      background: transparent;
+    }
+
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="cardWrapper">
+      <script>
+        function cardView() {
+          try {
+            var ORIGIN = "https://card-webview.sb.stag.card91.in";
+            var params = {
+              "payload": {
+                "cardHolderName": "rajat",
+                "customerId": "231013181102551ID1CUSTID6084335",
+                "cardId": "231013181102629ID1CARD1537670",
+                "last4digits": "9798",
+                "token": "C91CH5fM5KccR5RlLdEBbj5LV96B5VIrPMd5yQ2zldkR4GKA= "
+              },
+              "type": "C91_CARD_SET_PARAMS"
+            }
+            document.getElementById("cardView").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      </script>
+      <iframe onLoad="cardView()" src="https://card-webview.sb.stag.card91.in/view-card?templateId=trapeza&platform=ios" frameborder="0"
+        id="cardView"></iframe>
+    </div>
+  </div>
+</body>
+
+</html>
