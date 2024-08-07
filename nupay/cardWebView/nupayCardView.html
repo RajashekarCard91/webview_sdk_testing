@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>card91</title>
+    <style>
+      .container {
+        position: relative;
+        background: url("../../public/Images/card_image_nsdl_visa.png")
+          no-repeat;
+        background-size: 328px 208px;
+        height: 208px;
+        width: 328px;
+        /* background-color: red; */
+      }
+
+      .cardWrapper {
+        height: 208px;
+        width: 328px;
+        background: transparent;
+      }
+
+      iframe {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="cardWrapper">
+        <script>
+          window.addEventListener(
+            "message",
+            (e) => {
+              console.log("e,", e);
+              if (e.data.type === "C91_CARD_VIEWER_INITIALISED") {
+                cardView();
+              }
+            },
+            false
+          );
+          function cardView() {
+            try {
+              var ORIGIN = "http://localhost:3000";
+              var params = {
+                payload: {
+                  cardHolderName: "vishal",
+                  cardId: "240725121805209ID1CARD7086068",
+                  customerId: "240702112036524ID1CUSTID6991864",
+                  last4digits: "5585",
+                  token: "C91IP_eiFvE374I/MthQp9YDnKOojhcmvdxnPN5lM5nEPdtMI=",
+                },
+                type: "C91_CARD_SET_PARAMS",
+              };
+              document
+                .getElementById("cardView")
+                .contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        </script>
+        <iframe
+          src="http://localhost:3000/view-card?templateId=xoltt&platform=ios"
+          frameborder="0"
+          id="cardView"
+        ></iframe>
+      </div>
+    </div>
+  </body>
+</html>
