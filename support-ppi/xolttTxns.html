@@ -29,11 +29,11 @@
         );
         function txnPage() {
             try {
-                var ORIGIN = "https://card-webview.qa.card91.in";
+                var ORIGIN = "http://localhost:3000";
                 var params = {
                     "payload": {
-                        "cardId": "240725123531354ID1CARD4292856", //Card holder card id
-                        "token": "C91IP_6bmEOyhbey+i6Z/WK2fwZft9RIrQwOc1ZnaMJ5VXqTs=",
+                        "cardId": "240827091034970ID1CARD6009773", //Card holder card id
+                        "token": "C91IP_QGfetCupZT9A2if7mc41OGz+tpbeGGYzdEOBasA/jK4=",
                         "issuer":"NSDL"
                     },
                     "type": "C91_TXN_SET_PARAMS"
@@ -44,7 +44,7 @@
             }
         }
     </script>
-    <iframe src="https://card-webview.qa.card91.in/transactions?templateId=xoltt&platform=ios" frameborder="0" allow="midi"
+    <iframe src="http://localhost:3000/transactions?templateId=xoltt&platform=ios" frameborder="0" allow="midi"
         id="txnPage"></iframe>
     </div>
 </body>

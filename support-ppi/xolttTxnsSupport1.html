@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Freshworks Widget Example</title>
+    <script>
+      window.fwSettings = {
+        widget_id: 84000003184,
+      };
+
+      !(function () {
+        if (typeof window.FreshworksWidget !== "function") {
+          var n = function () {
+            n.q.push(arguments);
+          };
+          n.q = [];
+          window.FreshworksWidget = n;
+        }
+      })();
+
+      function loadFunction() {
+        FreshworksWidget(
+          "identify",
+          "ticketForm",
+          {
+            name: "123123",
+            unique_external_id: "card91 customer id",
+            custom_fields: {
+              cf_transaction_id: "10023456",
+            },
+          },
+          {
+            formId: 1234, // Ticket Form ID
+          }
+        );
+        // <!--                FreshworksWidget('prefill', 'ticketForm', {-->
+        // <!--                  subject: 'Damaged order',-->
+        // <!--                  description: 'I received a damaged product',-->
+        // <!--                  priority: 1,-->
+        // <!--                  status: 2,-->
+        // <!--                  group_id: 84000293760,-->
+        // <!--                  product_id: 84000008382,-->
+        // <!--                  type: 'Question',-->
+        // <!--                  unique_external_id:'323233CP2323',-->
+        // <!--                  custom_fields: {-->
+        // <!--                    cf_transaction_id: 100, //Number field-->
+        // <!--                    cf_date_of_order: '2019-12-31', //Date field-->
+        // <!--                    cf_order_name: 'Model S', //Single line text field-->
+        // <!--                    cf_order_amount: 94099.90, //Decimal field-->
+        // <!--                    cf_order_details: 'I have a problem with this order', //Multi line text field-->
+        // <!--                    cf_location_country: 'United States', //Dropdown field-->
+        // <!--                    cf_warranty: true, //Checkbox-->
+        // <!--                  }}, {-->
+        // <!--                    formId: 1234 // Ticket Form ID-->
+        // <!--                    }-->
+        // <!--                  );-->
+      }
+    </script>
+    <script
+      type="text/javascript"
+      src="https://ind-widget.freshworks.com/widgets/84000003184.js"
+      async
+      defer
+    ></script>
+  </head>
+
+  <body onload="loadFunction()">
+    <h1>My First JavaScript</h1>
+
+    <button
+      type="button"
+      onclick="document.getElementById('demo').innerHTML = new Date().toLocaleString()"
+    >
+      Click me to display Date and Time.
+    </button>
+
+    <p id="demo"></p>
+  </body>
+</html>

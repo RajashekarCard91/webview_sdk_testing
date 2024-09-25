@@ -20,8 +20,8 @@
         window.addEventListener(
             "message",
             (e) => {
-                console.log("e,", e);
-                if (e.data.type === "C91_TXN_SCREEN_INITIALISED") {
+                // console.log("e,", e);
+                if (e.data.type === "C91_TICKET_SCREEN_INITIALISED") {
                     txnPage();
                 }
             },
@@ -29,14 +29,18 @@
         );
         function txnPage() {
             try {
-                var ORIGIN = "https://card-webview.qa.card91.in";
+                var ORIGIN = "http://localhost:3000";
                 var params = {
                     "payload": {
-                        "cardId": "240725123531354ID1CARD4292856", //Card holder card id
-                        "token": "C91IP_6bmEOyhbey+i6Z/WK2fwZft9RIrQwOc1ZnaMJ5VXqTs=",
+                        "cardId": "240830100257345ID1CARD0029923", //Card holder card id
+                        "customerId": "240830100257322ID1CUSTID1653447",
+                        "token": "C91IP_dyHh+ni3P/jdDPqCAYvlapBsHADzxunSUCLTjSfNozc=",
+                         "phoneNumber": "8527691304",
+                        "cardHolderName": "Sarthal",
+                        // "pettyCash":true,
                         "issuer":"NSDL"
                     },
-                    "type": "C91_TXN_SET_PARAMS"
+                    "type": "C91_TICKET_SET_PARAMS"
                 }
                 document.getElementById("txnPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
             } catch (error) {
@@ -44,7 +48,7 @@
             }
         }
     </script>
-    <iframe src="https://card-webview.qa.card91.in/transactions?templateId=xoltt&platform=ios" frameborder="0" allow="midi"
+    <iframe src="http://localhost:3000/tickets?templateId=xoltt&platform=ios" frameborder="0" allow="midi"
         id="txnPage"></iframe>
     </div>
 </body>

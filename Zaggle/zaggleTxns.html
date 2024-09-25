@@ -20,7 +20,7 @@
         window.addEventListener(
             "message",
             (e) => {
-                console.log("e,", e);
+                // console.log("e,", e);
                 if (e.data.type === "C91_TXN_SCREEN_INITIALISED") {
                     txnPage();
                 }
@@ -29,12 +29,14 @@
         );
         function txnPage() {
             try {
-                var ORIGIN = "http://localhost:3000";
+                var ORIGIN = "https://card-webview.develop.card91.in";
                 var params = {
                     "payload": {
-                        "cardId": "240702112036567ID1CARD7065424", //Card holder card id
-                        "token": "C91IP_GSIklZFn2ZUCV0ZJ23GD0GjQsKoKn/ax0EH/j4yPetI=",
-                        "pettyCash":true
+                        "cardId": "240830100257345ID1CARD0029923", //Card holder card id
+                        "token": "C91IP_A10Z1GPinEctnPZ063TaNCAxfHh008FMu5mHsuV72QM=",
+                        "phoneNumber": "8527691304",
+                        // "pettyCash":true,
+                        "issuer":"NSDL"
                     },
                     "type": "C91_TXN_SET_PARAMS"
                 }
@@ -44,7 +46,7 @@
             }
         }
     </script>
-    <iframe src="http://localhost:3000/transactions?templateId=zaggle&platform=ios" frameborder="0" allow="midi"
+    <iframe src="https://card-webview.develop.card91.in/transactions?templateId=xoltt&platform=ios" frameborder="0" allow="midi"
         id="txnPage"></iframe>
     </div>
 </body>
