@@ -1,141 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>card91 Test</title>
     <style>
-        /* iframe {
+      /* iframe {
             height: 1200px;
             width: 100%;
         } */
-         body {
-            /* background-color: rgb(47, 70, 202); */
-         }
-        .container {
-            /* background: url('./balance_bg.gif') no-repeat; */
+      body {
+        /* background-color: rgb(47, 70, 202); */
+      }
+      .container {
+        /* background: url('./balance_bg.gif') no-repeat; */
 
-            background-color: red;
-            background-size: 100% 160px;
-            height: 226px;
-            width: 314px;
-            
-        }
+        background-color: red;
+        background-size: 100% 160px;
+        height: 226px;
+        width: 314px;
+      }
 
-        .cardWrapper {
-            height: 240px;
-            width: 314px;
-            /* border: 1px solid white; */
+      .cardWrapper {
+        height: 240px;
+        width: 314px;
+        /* border: 1px solid white; */
 
-            background: url('./zaggle_background.png') no-repeat center;
-            background-size: contain;
-            /* background-position: center; */
-            /* z-index: 10; */
-            /* background-size:; */
-            /* border: 1px solid red; */
-            /* margin-top: 10px; */
-            /* display: flex; */
-            
-        }
+        background: url("./zaggle_background.png") no-repeat center;
+        background-size: contain;
+        /* background-position: center; */
+        /* z-index: 10; */
+        /* background-size:; */
+        /* border: 1px solid red; */
+        /* margin-top: 10px; */
+        /* display: flex; */
+      }
 
-        .cardDetails {
-            /* z-index: 100; */
-            height: 130px;
-            /* border: 1px solid white; */
-        
-        }
+      .cardDetails {
+        /* z-index: 100; */
+        height: 130px;
+        /* border: 1px solid white; */
+      }
 
-        .walletDetails {
-            height: 90px;
-            /* border: 1px solid white; */
-            /* background-color: aqua; */
-        }
+      .walletDetails {
+        height: 90px;
+        /* border: 1px solid white; */
+        /* background-color: aqua; */
+      }
 
-        #walletPage {
-            height: 100%;
-            width: 100%;
-           
-        }
+      #walletPage {
+        height: 100%;
+        width: 100%;
+      }
 
-        #cardView {
-            height: 100%;
-            width: 100%;
-        }
+      #cardView {
+        height: 100%;
+        width: 100%;
+      }
     </style>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <script>
+      window.addEventListener(
+        "message",
+        (e) => {
+          console.log("e,", e);
+          if (e.data.type === "C91_WALLET_SCREEN_INITIALISED") {
+            walletPage();
+          }
+          if (e.data.type === "C91_CARD_VIEWER_INITIALISED") {
+            cardView();
+          }
+        },
+        false
+      );
 
-        window.addEventListener("message",
-            (e) => {
-                console.log("e,", e);
-                if (e.data.type === "C91_WALLET_SCREEN_INITIALISED") {
-                    walletPage();
-                }
-                if (e.data.type === "C91_CARD_VIEWER_INITIALISED") {
-                    cardView();
-                }
+      function cardView() {
+        try {
+          var ORIGIN = "http://localhost:3000";
+          var params = {
+            // "payload": {
+            //     "cardHolderName": "Avery Kuhn",
+            //     "cardId": "240625092125919ID1CARD1093850",
+            //     "customerId": "240625092125756ID1CUSTID7573208",
+            //     "last4digits": "6222",
+            //     "token": "C91IP_8sgX6Asg+LaqU9uVS4PCrZ5X7yGON1TsZMZvxe4qpFQ="
+            // },
+            payload: {
+              cardHolderName: "Evie Frye",
+              cardId: "240725121805209ID1CARD7086068",
+              customerId: "240702112036524ID1CUSTID6991864",
+              last4digits: "5585",
+              token: "C91IP_xwYLkZvpdhxY36sPCUumsEpwg+m4ja8GyolAiIU8Jn8=",
             },
-            false,
-        );
-
-        function cardView() {
-            try {
-                var ORIGIN = "http://localhost:3000";
-                var params = {
-                    // "payload": {
-                    //     "cardHolderName": "Avery Kuhn",
-                    //     "cardId": "240625092125919ID1CARD1093850",
-                    //     "customerId": "240625092125756ID1CUSTID7573208",
-                    //     "last4digits": "6222",
-                    //     "token": "C91IP_8sgX6Asg+LaqU9uVS4PCrZ5X7yGON1TsZMZvxe4qpFQ="
-                    // },
-                    "payload": {
-               "cardHolderName": "Evie Frye",
-               "cardId": "240624111000385ID1CARD0416435",
-               "customerId": "240624111000295ID1CUSTID2034580",
-               "last4digits": "0004",
-               "token": "C91IP_bVR/Y8ZUgdQWEA5XBAQbVkFCv8ip+xwI408ZnDEU2Yc="
-             },
-                    "type": "C91_CARD_SET_PARAMS"
-                }
-                document.getElementById("cardView").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
-            } catch (error) {
-                console.log(error);
-            }
+            type: "C91_CARD_SET_PARAMS",
+          };
+          document
+            .getElementById("cardView")
+            .contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+        } catch (error) {
+          console.log(error);
         }
+      }
 
-        function walletPage() {
-            try {
-                var ORIGIN = "http://localhost:3000";
-                // console.log("Intializgin")
-                var params = {
-                    "payload": {
-                        "cardId": "240702112036567ID1CARD7065424", //Card holder card id
-                        "token": "C91IP_CNz+4/KOSt5wME3fWITtfwiiP/ElnUGLewU6sQ643ig=" ///card holder auth token
-                    },
-                    "type": "C91_WALLET_SET_PARAMS" // Event type
-                }
-                document.getElementById("walletPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
-            } catch (error) {
-                console.log(error);
-            }
+      function walletPage() {
+        try {
+          var ORIGIN = "http://localhost:3000";
+          // console.log("Intializgin")
+          var params = {
+            payload: {
+              cardId: "240702112036567ID1CARD7065424", //Card holder card id
+              token: "C91IP_CNz+4/KOSt5wME3fWITtfwiiP/ElnUGLewU6sQ643ig=", ///card holder auth token
+            },
+            type: "C91_WALLET_SET_PARAMS", // Event type
+          };
+          document
+            .getElementById("walletPage")
+            .contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+        } catch (error) {
+          console.log(error);
         }
+      }
     </script>
     <div class="cardWrapper">
-        <div class="cardDetails">
-            <iframe src="http://localhost:3000/view-card?templateId=xoltt&platform=ios" frameborder="0"
-                id="cardView"></iframe>
-        </div>
-        <div class="walletDetails">
-            <iframe src="http://localhost:3000/wallets?templateId=xoltt&platform=ios" frameborder="0" allow="midi"
-                id="walletPage"></iframe>
-        </div>
+      <div class="cardDetails">
+        <iframe
+          src="http://localhost:3000/view-card?templateId=xoltt&platform=ios"
+          frameborder="0"
+          id="cardView"
+        ></iframe>
+      </div>
+      <div class="walletDetails">
+        <iframe
+          src="http://localhost:3000/wallets?templateId=xoltt&platform=ios"
+          frameborder="0"
+          allow="midi"
+          id="walletPage"
+        ></iframe>
+      </div>
     </div>
-</body>
-
-</html> 
+  </body>
+</html>

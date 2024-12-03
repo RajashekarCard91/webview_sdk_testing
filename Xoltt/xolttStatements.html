@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>card91</title>
+  <style>
+    iframe {
+      height: 800px;
+      width: 100%;
+      overflow: hidden;
+    }
+  </style>
+
+</head>
+
+<body>
+  <script>
+     window.addEventListener("message",
+      (e) => {
+        console.log("e,", e);
+         if (e.data.type === "C91_STATEMENT_SCREEN_INITIALISED") {
+          statementPage()
+            }
+           },
+          false,
+        );
+    function statementPage() {
+      try {
+        var ORIGIN = "http://localhost:3000";
+        var params = {
+          "payload": {
+            "cardId": "240830100257345ID1CARD0029923",
+            "token": "C91IP_grDqv5ZB0jNypBGdU7C5bwIVIGgdZ+KlXw3KZmdUzQE=",
+            "cardHolderName": "Sagar Prakash Joshi",
+            "phoneNumber": "918527691304",
+            "last4digits": "9284",
+            "organization": "NSDL Test Org",
+            "issuer": 'INDIANBANK',
+            "cardType": 'GC'
+          },
+          "type": "C91_STATEMENT_SET_PARAMS"
+        }
+        document.getElementById("statementPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  </script>
+  <iframe onLoad="statementPage()" src="http://localhost:3000/statements?templateId=xoltt&platform=ios" frameborder="0"
+    allow="midi" id="statementPage"></iframe>
+  </div>
+</body>
+
+</html>

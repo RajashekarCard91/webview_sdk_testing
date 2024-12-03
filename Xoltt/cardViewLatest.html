@@ -9,18 +9,16 @@
       .container {
         position: relative;
         /* background: url("./card-default.png") no-repeat; */
-        background-size: 328px 208px;
-        /* background: url("./bulkpe.png") no-repeat; */
         background: url("./bulkPeback(1).png") no-repeat;
+        background-size: 328px 208px;
         height: 208px;
         width: 328px;
-        /* background-color: red; */
       }
 
       .cardWrapper {
         height: 208px;
         width: 328px;
-        /* background: transparent; */
+        background: transparent;
       }
 
       iframe {
@@ -45,14 +43,14 @@
           );
           function cardView() {
             try {
-              var ORIGIN = "http://localhost:3000";
+              var ORIGIN = "http://locahost:3000";
               var params = {
                 payload: {
-                  cardHolderName: "xxxxxxx",
+                  cardHolderName: "wqqweqwe",
                   cardId: "241108114719887ID1CARD0038872",
                   customerId: "240715103156326ID1CUSTID3621586",
                   last4digits: "7704",
-                  token: "C91IP_HVw8q9KPAJH9GxfMYHjiUFrg3eys90VwtdaHMITDRVA=",
+                  token: "C91IP_vXX93fCu3sCBL/3771MEOqj3Z7lsmxnmBuppHn4ntgA=",
                 },
                 type: "C91_CARD_SET_PARAMS",
               };
@@ -65,7 +63,7 @@
           }
         </script>
         <iframe
-          src="http://localhost:3000/view-card?templateId=xoltt&platform=ios"
+          src="http://locahost:3000/view-card?templateId=xoltt&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>
