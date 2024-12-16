@@ -6,29 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>card91 Test</title>
     <style>
-      /* iframe {
-            height: 1200px;
-            width: 100%;
-        } */
-      body {
-        /* background-color: rgb(47, 70, 202); */
-      }
       .container {
         /* background: url('./balance_bg.gif') no-repeat; */
-
-        background-color: red;
+        /* background-color: red; */
         background-size: 100% 160px;
-        height: 226px;
-        width: 314px;
+        height: 500px;
+        width: 500px;
+        position: relative;
       }
 
       .cardWrapper {
-        height: 240px;
-        width: 314px;
-        /* border: 1px solid white; */
-
-        background: url("./zaggle_background.png") no-repeat center;
-        background-size: contain;
+        position: absolute;
+        top: 20px;
+        height: 186px;
+        left: -5px;
+        width: 324px;
+        background: url("./zaggle_background.png") no-repeat;
+        /* background-size: contain; */
         /* background-position: center; */
         /* z-index: 10; */
         /* background-size:; */
@@ -39,14 +33,14 @@
 
       .cardDetails {
         /* z-index: 100; */
-        height: 130px;
-        /* border: 1px solid white; */
+        position: absolute;
+        height: 114px;
       }
 
       .walletDetails {
-        height: 90px;
-        /* border: 1px solid white; */
-        /* background-color: aqua; */
+        height: 88px;
+        position: absolute;
+        top: 136px;
       }
 
       #walletPage {
@@ -61,7 +55,7 @@
     </style>
   </head>
 
-  <body>
+  <body style="background-color: gray">
     <script>
       window.addEventListener(
         "message",
@@ -79,21 +73,14 @@
 
       function cardView() {
         try {
-          var ORIGIN = "http://localhost:3000";
+          var ORIGIN = "https://card-webview.sb.card91.in";
           var params = {
-            // "payload": {
-            //     "cardHolderName": "Avery Kuhn",
-            //     "cardId": "240625092125919ID1CARD1093850",
-            //     "customerId": "240625092125756ID1CUSTID7573208",
-            //     "last4digits": "6222",
-            //     "token": "C91IP_8sgX6Asg+LaqU9uVS4PCrZ5X7yGON1TsZMZvxe4qpFQ="
-            // },
             payload: {
               cardHolderName: "Evie Frye",
-              cardId: "240608100419828ID1CARD8095835",
-              customerId: "240608100419752ID1CUSTID9392334",
-              last4digits: "7773",
-              token: "C91IP_qh89TBlXvUdcFe18e/XEaxTcSO6W3u+hVwzi8kAaXWo=",
+              cardId: "230704125202564ID1CARD6454936",
+              customerId: "221021094144048ID1CUSTID7600020",
+              last4digits: "8293",
+              token: "C91IP_Sh8UItqlgTzIQphRKvruDDqTyhYgJtdyHZp9/KHrh5g=",
             },
             type: "C91_CARD_SET_PARAMS",
           };
@@ -107,12 +94,12 @@
 
       function walletPage() {
         try {
-          var ORIGIN = "http://localhost:3000";
-          // console.log("Intializgin")
+          var ORIGIN = "https://card-webview.sb.card91.in";
           var params = {
             payload: {
-              cardId: "240608100419828ID1CARD8095835", //Card holder card id
-              token: "C91IP_qh89TBlXvUdcFe18e/XEaxTcSO6W3u+hVwzi8kAaXWo=", ///card holder auth token
+              cardId: "230704125202564ID1CARD6454936", //Card holder card id
+              token: "C91IP_Sh8UItqlgTzIQphRKvruDDqTyhYgJtdyHZp9/KHrh5g=", ///card holder auth token
+              whichWallet: "NCMC",
             },
             type: "C91_WALLET_SET_PARAMS", // Event type
           };
@@ -124,17 +111,18 @@
         }
       }
     </script>
-    <div class="cardWrapper">
+    <div class="container">
+      <div class="cardWrapper"></div>
       <div class="cardDetails">
         <iframe
-          src="http://localhost:3000/view-card?templateId=zaggle&platform=ios"
+          src="https://card-webview.sb.card91.in/view-card?templateId=zaggle&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>
       </div>
       <div class="walletDetails">
         <iframe
-          src="http://localhost:3000/wallets?templateId=zaggle&platform=ios"
+          src="https://card-webview.sb.card91.in/wallets?templateId=zaggle&platform=ios"
           frameborder="0"
           allow="midi"
           id="walletPage"

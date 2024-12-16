@@ -20,7 +20,7 @@
         window.addEventListener(
             "message",
             (e) => {
-                console.log("e,", e);
+                // console.log("e,", e);
                 if (e.data.type === "C91_TXN_SCREEN_INITIALISED") {
                     txnPage();
                 }
@@ -33,10 +33,10 @@
                 var params = {
                     "payload": {
                         "cardId": "240918050658101ID1CARD6127095", //Card holder card id
-                        "token": "C91IP_T376I7m6wsPL1GR7qtLrbdMKyxwKrJJan6WUx3XzFl8=",
-                        "issuer":"NSDL",
-                        "customerId":"240918050658062ID1CUSTID1971930",
-                        "phoneNumber":"919488934086"
+                        "token": "C91IP_SKaVkFE3/m4P8tG8bn72ELPLSZuMu+9K7VAIkl0zAX8=",
+                        "phoneNumber": "919488934086",
+                        "pettyCash":true,
+                        // "issuer":"INDIANBANK"
                     },
                     "type": "C91_TXN_SET_PARAMS"
                 }
@@ -46,7 +46,7 @@
             }
         }
     </script>
-    <iframe src="http://localhost:3000/transactions?templateId=xoltt&platform=ios" frameborder="0" allow="midi"
+    <iframe src="http://localhost:3000/transactions?templateId=zaggle&platform=ios" frameborder="0" allow="midi"
         id="txnPage"></iframe>
     </div>
 </body>

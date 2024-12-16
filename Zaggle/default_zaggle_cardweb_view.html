@@ -6,29 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>card91 Test</title>
     <style>
-      /* iframe {
-            height: 1200px;
-            width: 100%;
-        } */
-      body {
-        /* background-color: rgb(47, 70, 202); */
-      }
       .container {
         /* background: url('./balance_bg.gif') no-repeat; */
-
-        background-color: red;
+        /* background-color: red; */
         background-size: 100% 160px;
-        height: 226px;
-        width: 314px;
+        height: 500px;
+        width: 500px;
+        position: relative;
       }
 
       .cardWrapper {
-        height: 240px;
-        width: 314px;
-        /* border: 1px solid white; */
-
-        background: url("./zaggle_background.png") no-repeat center;
-        background-size: contain;
+        position: absolute;
+        top: 20px;
+        height: 186px;
+        left: -5px;
+        width: 324px;
+        background: url("./zaggle_background.png") no-repeat;
+        /* background-size: contain; */
         /* background-position: center; */
         /* z-index: 10; */
         /* background-size:; */
@@ -39,14 +33,14 @@
 
       .cardDetails {
         /* z-index: 100; */
-        height: 130px;
-        /* border: 1px solid white; */
+        position: absolute;
+        height: 114px;
       }
 
       .walletDetails {
-        height: 90px;
-        /* border: 1px solid white; */
-        /* background-color: aqua; */
+        height: 88px;
+        position: absolute;
+        top: 136px;
       }
 
       #walletPage {
@@ -61,7 +55,7 @@
     </style>
   </head>
 
-  <body>
+  <body style="background-color: gray">
     <script>
       window.addEventListener(
         "message",
@@ -81,16 +75,9 @@
         try {
           var ORIGIN = "http://localhost:3000";
           var params = {
-            // "payload": {
-            //     "cardHolderName": "Avery Kuhn",
-            //     "cardId": "240625092125919ID1CARD1093850",
-            //     "customerId": "240625092125756ID1CUSTID7573208",
-            //     "last4digits": "6222",
-            //     "token": "C91IP_8sgX6Asg+LaqU9uVS4PCrZ5X7yGON1TsZMZvxe4qpFQ="
-            // },
             payload: {
               cardHolderName: "Evie Frye",
-              cardId: "240608100419828ID1CARD8095835",
+              cardId: "241029103956013ID1CARD9959648",
               customerId: "240608100419752ID1CUSTID9392334",
               last4digits: "7773",
               token: "C91IP_qh89TBlXvUdcFe18e/XEaxTcSO6W3u+hVwzi8kAaXWo=",
@@ -108,10 +95,9 @@
       function walletPage() {
         try {
           var ORIGIN = "http://localhost:3000";
-          // console.log("Intializgin")
           var params = {
             payload: {
-              cardId: "240608100419828ID1CARD8095835", //Card holder card id
+              cardId: "241029103956013ID1CARD9959648", //Card holder card id
               token: "C91IP_qh89TBlXvUdcFe18e/XEaxTcSO6W3u+hVwzi8kAaXWo=", ///card holder auth token
             },
             type: "C91_WALLET_SET_PARAMS", // Event type
@@ -124,7 +110,8 @@
         }
       }
     </script>
-    <div class="cardWrapper">
+    <div class="container">
+      <div class="cardWrapper"></div>
       <div class="cardDetails">
         <iframe
           src="http://localhost:3000/view-card?templateId=zaggle&platform=ios"
