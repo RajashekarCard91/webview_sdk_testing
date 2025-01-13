@@ -73,14 +73,14 @@
 
       function cardView() {
         try {
-          var ORIGIN = "https://card-webview.sb.card91.in";
+          var ORIGIN = "http://localhost:3000";
           var params = {
             payload: {
-              cardHolderName: "Evie Frye",
-              cardId: "230704125202564ID1CARD6454936",
-              customerId: "221021094144048ID1CUSTID7600020",
-              last4digits: "8293",
-              token: "C91IP_Sh8UItqlgTzIQphRKvruDDqTyhYgJtdyHZp9/KHrh5g=",
+              cardHolderName: "horse singh",
+              cardId: "241218163158406ID1CARD3162830",
+              customerId: "241218163158376ID1CUSTID7793405",
+              last4digits: "9678",
+              token: "C91IP_e8igNLpIfNJieeNkfixoUQYeejXZ0gCoHs81p9No2M0=",
             },
             type: "C91_CARD_SET_PARAMS",
           };
@@ -94,11 +94,11 @@
 
       function walletPage() {
         try {
-          var ORIGIN = "https://card-webview.sb.card91.in";
+          var ORIGIN = "http://localhost:3000";
           var params = {
             payload: {
-              cardId: "230704125202564ID1CARD6454936", //Card holder card id
-              token: "C91IP_Sh8UItqlgTzIQphRKvruDDqTyhYgJtdyHZp9/KHrh5g=", ///card holder auth token
+              cardId: "241218163158406ID1CARD3162830", //Card holder card id
+              token: "C91IP_e8igNLpIfNJieeNkfixoUQYeejXZ0gCoHs81p9No2M0=", ///card holder auth token
               whichWallet: "NCMC",
             },
             type: "C91_WALLET_SET_PARAMS", // Event type
@@ -115,14 +115,14 @@
       <div class="cardWrapper"></div>
       <div class="cardDetails">
         <iframe
-          src="https://card-webview.sb.card91.in/view-card?templateId=zaggle&platform=ios"
+          src="http://localhost:3000/view-card?templateId=zaggle&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>
       </div>
       <div class="walletDetails">
         <iframe
-          src="https://card-webview.sb.card91.in/wallets?templateId=zaggle&platform=ios"
+          src="http://localhost:3000/wallets?templateId=zaggle&platform=ios"
           frameborder="0"
           allow="midi"
           id="walletPage"
