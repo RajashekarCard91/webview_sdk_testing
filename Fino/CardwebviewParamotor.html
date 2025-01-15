@@ -43,7 +43,7 @@
           );
           function cardView() {
             try {
-              var ORIGIN = "https://card-webview.qual.card91.in";
+              var ORIGIN = "http://localhost:3000";
               var params = {
                 payload: {
                   // cardHolderName: "NCMC load",
@@ -51,11 +51,11 @@
                   // customerId: "241128113206778ID1CUSTID2620971",
                   // last4digits: "4815",
                   // token: "C91IP_hj2QCoJAofGVJriJMt5biHwqTbD0WI64Vd/fIfcteRs=",
-                  cardHolderName: "Kashif Akhtar",
-                  cardId: "241108135657511ID1CARD9337856",
-                  customerId: "221021094144048ID1CUSTID7600020",
-                  last4digits: "9665",
-                  token: "C91IP_ol1K6lyt3pN5NT0Xu3PL4mIaiZ0o8rF5sPeh5IhRz/Q=",
+                  cardHolderName: "Kashif",
+                  cardId: "241213093243891ID1CARD6295335",
+                  customerId: "240715103156326ID1CUSTID3621586",
+                  last4digits: "4886",
+                  token: "C91IP_bWqQFeAmbwPRdF7M3R1F/UTvWga1IhSiYqZa8Jlbqf4=",
                 },
                 type: "C91_CARD_SET_PARAMS",
               };
@@ -68,7 +68,7 @@
           }
         </script>
         <iframe
-          src="https://card-webview.qual.card91.in/view-card?templateId=paramotor&platform=ios"
+          src="http://localhost:3000/view-card?templateId=paramotor&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>
