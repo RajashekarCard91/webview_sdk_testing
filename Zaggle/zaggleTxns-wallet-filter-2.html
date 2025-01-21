@@ -1,0 +1,59 @@
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>card91</title>
+    <style>
+        iframe {
+            height: 1200px;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+      window.addEventListener(
+            "message",
+            (e) => {
+              console.log("e,", e);
+              if (e.data.type === "C91_TXN_SCREEN_INITIALISED") {
+                txnPage();
+              }
+              if (e.data.type === "c91_TXN_SHARE_DETAILS_SUCCESS") {
+                console.log("Client received txn details",e.data.payload);
+              }
+            },
+            false,
+          );
+        function txnPage() {
+            try {
+                var ORIGIN = "https://card-webview-sandbox.card91.io"
+                var params = {
+                    "payload": {
+                        "cardId": "250115111609876ID1CARD8896216",
+                        "token": "C91IP_p/BUjGXFkjbZtCiTRJX/9TeWSAAjaZ0ZniGxJlo+nlM=",
+                        "pettyCash":true,
+                        "issuer": "NSDL",
+                        // "walletId":"f9610626-2f47-4819-b4e2-905f587b667e"
+                         
+                    },
+                    "type": "C91_TXN_SET_PARAMS"
+                }
+                document.getElementById("txnPage").contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    </script>
+    <iframe  src="https://card-webview-sandbox.card91.io/transactions?templateId=zaggle&platform=ios"
+        frameborder="0" allow="midi" id="txnPage"></iframe>
+    </div>
+</body>
+
+</html> 
