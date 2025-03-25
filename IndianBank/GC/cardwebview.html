@@ -8,7 +8,7 @@
     <style>
       .container {
         position: relative;
-        background: url("./ruCardImage2.png") no-repeat;
+        background: url("./indianBankGC.png") no-repeat;
         /* background-color: black; */
         background-size: 328px 208px;
         height: 208px;
@@ -44,19 +44,19 @@
           );
           function cardView() {
             try {
-              var ORIGIN = "http://localhost:3001";
+              var ORIGIN = "http://localhost:3000";
               var params = {
                 payload: {
-                  cardHolderName: "Pratiksha Mishra",
-                  cardId: "250325085631911ID1CARD4804178",
-                  customerId: "220520103240749ID1CUSTID6564980",
-                  last4digits: "9055",
-                  token: "C91IP_UFyoUBb5uGAjWRhwh8zxnO9DuBQsX3oXTr+UGrcB8Vg=",
-                  // cardHolderName: "Rajat Rawat",
-                  // cardId: "240621073641375ID1CARD7663080",
-                  // customerId: "240621073641337ID1CUSTID7990140",
-                  // last4digits: "9478",
-                  // token: "C91IP_k9fY4HLAc/ZE6R+IWNUwxXADUTwG0NpSd6weFL/7Pps=",
+                  // cardHolderName: "Pratiksha Mishra",
+                  // cardId: "250325085631911ID1CARD4804178",
+                  // customerId: "220520103240749ID1CUSTID6564980",
+                  // last4digits: "9055",
+                  // token: "C91IP_UFyoUBb5uGAjWRhwh8zxnO9DuBQsX3oXTr+UGrcB8Vg=",
+                  cardHolderName: "Rajat Rawat",
+                  cardId: "240621073641375ID1CARD7663080",
+                  customerId: "240621073641337ID1CUSTID7990140",
+                  last4digits: "9478",
+                  token: "C91IP_jWvK5dmcr4fHh8vFq2DUR7E586ZdYE97JPR0h4GrsUc=",
                 },
                 type: "C91_CARD_SET_PARAMS",
               };
@@ -69,7 +69,7 @@
           }
         </script>
         <iframe
-          src="http://localhost:3001/view-card?templateId=ruCard&platform=ios"
+          src="http://localhost:3000/view-card?templateId=indianGC&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>
