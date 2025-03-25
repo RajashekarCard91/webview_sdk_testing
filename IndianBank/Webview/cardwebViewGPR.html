@@ -8,7 +8,7 @@
     <style>
       .container {
         position: relative;
-        background: url("./workfileEdited.png") no-repeat;
+        background: url("./indianBankGC.png") no-repeat;
         background-size: 328px 208px;
         height: 208px;
         width: 328px;
@@ -45,11 +45,17 @@
               var ORIGIN = "http://localhost:3000";
               var params = {
                 payload: {
-                  cardHolderName: "NCMC load",
-                  cardId: "241128120225991ID1CARD9193238",
-                  customerId: "241128113206778ID1CUSTID2620971",
-                  last4digits: "4815",
-                  token: "C91IP_KWMUE9JyVcsrFSvGhG5leV7+ODbUgquPBi0CjHgYGeU=",
+                  //  8882077430
+                  // cardHolderName: "WKJNEQWJJKEJKQWEJKWQEJMWQEKJWQEJKWQJ",
+                  // cardId: "CID250127082406364ID10262462",
+                  // customerId: "240715103156326ID1CUSTID3621586",
+                  // last4digits: "0918",
+                  // token: "C91IP_+4K0Q4ZdKo1v/y/TJkL+oZIjRKO1AxhQl4EZAyiiBZQ=",
+                  cardHolderName: "Rajat Rawat", // 8958085912
+                  cardId: "240621073641375ID1CARD7663080",
+                  customerId: "240621073641337ID1CUSTID7990140",
+                  last4digits: "9478",
+                  token: "C91IP_CwPshE1hFJfGOCfClLeW25CexNU4N5XW27mRdRQiqQw=",
                 },
                 type: "C91_CARD_SET_PARAMS",
               };
@@ -62,7 +68,7 @@
           }
         </script>
         <iframe
-          src="http://localhost:3000/view-card?templateId=indianBank&platform=ios"
+          src="http://localhost:3000/view-card?templateId=indianGC&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>
