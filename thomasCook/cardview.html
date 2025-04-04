@@ -8,25 +8,24 @@
     <style>
       .container {
         position: relative;
-        background: url("./indianBankNCMC.jpg") no-repeat;
+        background: url("./cook_card.png") no-repeat;
+        /* background-color: black; */
         background-size: 246px 397px;
         height: 397px;
         width: 246px;
+        /* background-color: gray; */
       }
-
       .cardWrapper {
         height: 397px;
         width: 246px;
         background: transparent;
       }
-
       iframe {
         height: 100%;
         width: 100%;
       }
     </style>
   </head>
-
   <body>
     <div class="container">
       <div class="cardWrapper">
@@ -34,7 +33,7 @@
           window.addEventListener(
             "message",
             (e) => {
-              console.log("e,", e);
+              // console.log("e,", e);
               if (e.data.type === "C91_CARD_VIEWER_INITIALISED") {
                 cardView();
               }
@@ -43,15 +42,19 @@
           );
           function cardView() {
             try {
-              var ORIGIN = "http://localhost:3001";
+              var ORIGIN = "http://localhost:3000";
               var params = {
                 payload: {
-                  //  8882077430
-                  cardHolderName: "ABCDEFGHWEKJNRWEQWLJEJLQWEKLJQWEE wejlwe",
-                  cardId: "241213093243891ID1CARD6295335",
-                  customerId: "240715103156326ID1CUSTID3621586",
-                  last4digits: "4886",
-                  token: "C91IP_TFSZsZqXLosJaJGpJIzhAMauTXGDyCRPkQR3q/vuLxs=",
+                  // cardHolderName: "Pratiksha Mishra",
+                  // cardId: "250325085631911ID1CARD4804178",
+                  // customerId: "220520103240749ID1CUSTID6564980",
+                  // last4digits: "9055",
+                  // token: "C91IP_UFyoUBb5uGAjWRhwh8zxnO9DuBQsX3oXTr+UGrcB8Vg=",
+                  cardHolderName: "Rajat Rawat",
+                  cardId: "CID250226054339480ID19587543",
+                  customerId: "CUST250226054112542ID12880561",
+                  last4digits: "4110",
+                  token: "C91IP_2PRr9Cjb6owAlqLfFXzD9HojvX+So+gY2i2SKUsowVE=",
                 },
                 type: "C91_CARD_SET_PARAMS",
               };
@@ -64,8 +67,7 @@
           }
         </script>
         <iframe
-          onLoad="cardView()"
-          src="http://localhost:3001/view-card?templateId=indianNCMC&platform=ios"
+          src="http://localhost:3000/view-card?templateId=thomasCook&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>
