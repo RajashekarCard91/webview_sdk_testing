@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>card91</title>
+    <style>
+      #cardView {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: none;
+        height: 100%;
+        width: 500px;
+        height: 500px;
+        background: black;
+      }
+      /* @media screen and (max-width: 599px) {
+        .container {
+          width: 1140px;
+          height: 1000px;
+        }
+      } */
+    </style>
+  </head>
+  <body>
+    <div className="">
+      <script>
+        window.addEventListener(
+          "message",
+          (e) => {
+            if (e.data.type === "C91_RESET_PIN_OTP_SCREEN_INITIALISED") {
+              cardView();
+            }
+          },
+          false
+        );
+        // 8744722359
+        // 9123491234
+        // 8049878722
+        function cardView() {
+          try {
+            var ORIGIN = "http://localhost:3000";
+            const params = {
+              payload: {
+                phoneNumber: "9123491234",
+                cardId: "250416062218429ID1CARD5447168",
+                token: "C91IP_fDkMhKlhkequDciwmh91woS7Hw2rJSaA4/5xy0HCj8Y=",
+              },
+              type: "C91_RESET_PIN_SET_PARAMS",
+            };
+            document
+              .getElementById("cardView")
+              .contentWindow.postMessage(JSON.stringify(params), "*");
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      </script>
+      <iframe
+        title="ResetATM pin webview"
+        allow="clipboard-read; clipboard-write"
+        ref="resetAtmPINwebViewIframeRef"
+        src="http://localhost:3000/reset-pin?templateId=FYP&platform=ios&usedFor=SET_PIN"
+        frameborder="0"
+        id="cardView"
+      ></iframe>
+    </div>
+  </body>
+</html>

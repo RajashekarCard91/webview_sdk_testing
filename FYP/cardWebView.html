@@ -6,58 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>card91</title>
     <style>
-      body {
-        background-color: rgb(171, 170, 170);
-      }
       .container {
         position: relative;
-        background: url("./FYP-image-full.png") no-repeat;
-        background-size: 239px 407px;
-        background-position: center center;
-        height: 407px;
-        width: 239px;
-        /* border: 1px solid gray; */
-        /* background-color: gray; */
+        /* background: url("../../test-card-cmpy.png") no-repeat; */
+        background-size: 341px 200px;
+        height: 200px;
+        width: 341px;
+        /* border: 1px solid red; */
+        background-color: green;
+      }
+      .bg-default {
+        background: url("../../test-card-cmpy.png") no-repeat;
+        background-size: 341px 200px;
+      }
+      .bg-toggled {
+        background: url("../../no-chip.png") no-repeat;
+        background-size: 341px 200px;
       }
 
       .cardWrapper {
-        height: 407px;
-        width: 239px;
+        height: 200px;
+        width: 341px;
         background: transparent;
-        /* border: 1px solid red; */
       }
 
       iframe {
         height: 100%;
         width: 100%;
-        /* border: 1px solid red; */
       }
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container bg-default">
       <div class="cardWrapper">
         <script>
           window.addEventListener(
             "message",
             (e) => {
-              console.log("e,", e);
               if (e.data.type === "C91_CARD_VIEWER_INITIALISED") {
                 cardView();
               }
+              // ...inside <script>...
+              if (e.data.type === "CARD_TOGGLE_ON") {
+                console.log("Card_Toggled_On event received");
+                const container = document.querySelector(".container");
+                container.classList.remove("bg-default");
+                container.classList.add("bg-toggled");
+              }
+              if (e.data.type === "CARD_TOGGLE_OFF") {
+                const container = document.querySelector(".container");
+                container.classList.remove("bg-toggled");
+                container.classList.add("bg-default");
+              }
+              // ...existing code...
             },
             false
           );
           function cardView() {
             try {
-              var ORIGIN = "https://card-webview.qa.card91.in";
+              var ORIGIN = "http://localhost:3000";
               var params = {
                 payload: {
-                  cardHolderName: "Evie Frye",
-                  cardId: "240624111000385ID1CARD0416435",
-                  customerId: "240624111000295ID1CUSTID2034580",
-                  last4digits: "0004",
-                  token: "C91IP_twsCYEIRkuwiun/kDE3TZLHzAjneQfnAB5TXRafjbLo=",
+                  cardHolderName: "Hilel Dillon",
+                  cardId: "250416062218429ID1CARD5447168",
+                  customerId: "250416062218388ID1CUSTID9625472",
+                  last4digits: "5506",
+                  token: "C91IP_ZcbSVEut4M30eeZs86qJtDs1iFhEyEmNA0xBUKYLNrk=",
                 },
                 type: "C91_CARD_SET_PARAMS",
               };
@@ -70,24 +84,10 @@
           }
         </script>
         <iframe
-          src="https://card-webview.qa.card91.in/view-card?templateId=FYP&platform=ios"
+          src="http://localhost:3000/view-card?templateId=FYP&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>
-        <!-- <iframe src="http://localhost:3000/view-card?templateId=zaggle&platform=ios"
-       frameborder="0" id="cardView"></iframe> -->
-        <!-- <iframe src="http://localhost:3000/view-card?templateId=yolo&platform=ios"
-       frameborder="0" id="cardView"></iframe> -->
-        <!-- <iframe src="http://localhost:3000/view-card?templateId=transasia&platform=ios"
-       frameborder="0" id="cardView"></iframe> -->
-        <!-- <iframe src="http://localhost:3000/view-card?templateId=nupay&platform=ios"
-       frameborder="0" id="cardView"></iframe> -->
-        <!-- <iframe src="http://localhost:3000/view-card?templateId=dvaraMoney&platform=ios"
-       frameborder="0" id="cardView"></iframe> -->
-        <!-- <iframe src="http://localhost:3000/view-card?templateId=xoltt&platform=ios"
-       frameborder="0" id="cardView"></iframe> -->
-        <!-- <iframe src="http://localhost:3000/view-card?templateId=xolttAED&platform=ios"
-       frameborder="0" id="cardView"></iframe> -->
       </div>
     </div>
   </body>
