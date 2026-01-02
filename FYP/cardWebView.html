@@ -16,7 +16,12 @@
         background-color: green;
       }
       .bg-default {
-        background: url("../../test-card-cmpy.png") no-repeat;
+        background: url("../../fyp_test_image.png") no-repeat;
+        /* background: url("../../fyp_design.png") no-repeat; */
+        background-size: 341px 200px;
+      }
+      .bg-default1 {
+        background: url("../../fyp_design.png") no-repeat;
         background-size: 341px 200px;
       }
       .bg-toggled {
@@ -67,11 +72,11 @@
               var ORIGIN = "http://localhost:3000";
               var params = {
                 payload: {
-                  cardHolderName: "Hilel Dillon",
-                  cardId: "250416062218429ID1CARD5447168",
+                  cardHolderName: "John Doe",
+                  cardId: "250603052653707ID1CARD6134452",
                   customerId: "250416062218388ID1CUSTID9625472",
-                  last4digits: "5506",
-                  token: "C91IP_ZcbSVEut4M30eeZs86qJtDs1iFhEyEmNA0xBUKYLNrk=",
+                  last4digits: "8534",
+                  token: "C91IP_eBCM5BaDGEhumks8n0qkb7sK0d6b0FUg7CfjKJTcT2c=",
                 },
                 type: "C91_CARD_SET_PARAMS",
               };
@@ -90,5 +95,6 @@
         ></iframe>
       </div>
     </div>
+    <div class="container bg-default1"></div>
   </body>
 </html>
