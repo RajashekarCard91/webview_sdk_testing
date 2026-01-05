@@ -6,54 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>card91</title>
     <style>
+      /* .container {
+        background-color: black;
+      } */
       iframe {
-        height: 1200px;
-        width: 100%;
+        height: 600px;
       }
     </style>
   </head>
-
-  <body style="background-color: #f4f4f4">
+  <body>
     <script>
       window.addEventListener(
         "message",
         (e) => {
           // console.log("e,", e);
-          if (e.data.type === "C91_TXN_SCREEN_INITIALISED") {
-            txnPage();
+          if (e.data.type === "C91_CARD_VIEWER_INITIALISED") {
+            cardView();
           }
         },
         false
       );
-      function txnPage() {
+      function cardView() {
         try {
           var ORIGIN = "http://localhost:3000";
           var params = {
             payload: {
-              cardId: "251220091815889ID1CARD5075430",
-              token: "C91IP_0xc3mmJ1FGyvgxkJmxuTLysSUCuMoeSkCjrK7pEVOpQ=",
-              cardHolderName: "qwoto jackson",
-              customerId: "251209141123886ID1CUSTID6382544",
-              phoneNumber: "918984740860",
-              last4digits: "2617",
-              organization: "Fashion Fiesta",
-              supportMailId: "support@gmail.com",
+              cardHolderName: "wqqweqwe",
+              cardId: "251202114156783ID1CARD3618207",
+              customerId: "251202114137477ID1CUSTID0612255",
+              last4digits: "7171",
+              token: "C91IP_NVnquA3XGrRhcey5zTEYuKpnDPtVRhlv4OVsGdOyWvE=",
             },
-            type: "C91_TXN_SET_PARAMS",
+            type: "C91_CARD_SET_PARAMS",
           };
           document
-            .getElementById("txnPage")
+            .getElementById("cardView")
             .contentWindow.postMessage(JSON.stringify(params), ORIGIN);
         } catch (error) {
           console.log(error);
         }
       }
     </script>
+    <!-- <div class="container"> -->
     <iframe
-      src="http://localhost:3000/transactions?templateId=orbit&platform=ios&mode=RECENT"
+      src="http://localhost:3000/view-card?templateId=orbit&platform=ios"
       frameborder="0"
-      allow="midi"
-      id="txnPage"
+      id="cardView"
     ></iframe>
+    <!-- </div> -->
   </body>
 </html>

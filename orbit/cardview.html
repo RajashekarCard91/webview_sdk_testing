@@ -7,7 +7,7 @@
     <title>card91</title>
     <style>
       /* .container {
-        border: 1px solid red;
+        background-color: black;
       } */
       iframe {
         height: 600px;
@@ -19,7 +19,7 @@
       window.addEventListener(
         "message",
         (e) => {
-          console.log("e,", e);
+          // console.log("e,", e);
           if (e.data.type === "C91_CARD_VIEWER_INITIALISED") {
             cardView();
           }
@@ -32,10 +32,10 @@
           var params = {
             payload: {
               cardHolderName: "wqqweqwe",
-              cardId: "251215073832454ID1CARD3145999",
-              customerId: "251119062818642ID1CUSTID8900050",
-              last4digits: "6362",
-              token: "C91IP_BiwtpXGAqqXhv5dCQyeXJxOGQq55D48QFNMGBOLGqTU=",
+              cardId: "251202114156783ID1CARD3618207",
+              customerId: "251202114137477ID1CUSTID0612255",
+              last4digits: "7171",
+              token: "C91IP_K3anKpuOOlAo7o5ogAFdRVYePz5AQLKJEtMtfHVIEt0=",
             },
             type: "C91_CARD_SET_PARAMS",
           };
@@ -47,10 +47,12 @@
         }
       }
     </script>
+    <!-- <div class="container"> -->
     <iframe
       src="http://localhost:3000/view-card?templateId=orbit&platform=ios"
       frameborder="0"
       id="cardView"
     ></iframe>
+    <!-- </div> -->
   </body>
 </html>

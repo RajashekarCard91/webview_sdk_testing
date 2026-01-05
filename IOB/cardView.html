@@ -8,12 +8,10 @@
     <style>
       .container {
         position: relative;
-        background: url("./indianBankGC.png") no-repeat;
-        /* background-color: black; */
+        background: url("./IOB_card_2.png") no-repeat;
         background-size: 328px 208px;
         height: 208px;
         width: 328px;
-        /* background-color: gray; */
       }
 
       .cardWrapper {
@@ -46,24 +44,12 @@
             try {
               var ORIGIN = "http://localhost:3000";
               var params = {
-                // payload: {
-                //   // cardHolderName: "Pratiksha Mishra",
-                //   // cardId: "250325085631911ID1CARD4804178",
-                //   // customerId: "220520103240749ID1CUSTID6564980",
-                //   // last4digits: "9055",
-                //   // token: "C91IP_UFyoUBb5uGAjWRhwh8zxnO9DuBQsX3oXTr+UGrcB8Vg=",
-                //   cardHolderName: "Rajat Rawat",
-                //   cardId: "240621073641375ID1CARD7663080",
-                //   customerId: "240621073641337ID1CUSTID7990140",
-                //   last4digits: "9478",
-                //   token: "C91IP_m+zv2eR3+0tq4ryw/abhsrmIV6gn6koAiocsheBDBNs=",
-                // },
                 payload: {
-                  cardHolderName: "wqqweqwe",
+                  cardHolderName: "jkasbf",
                   cardId: "251215073832454ID1CARD3145999",
                   customerId: "251119062818642ID1CUSTID8900050",
                   last4digits: "6362",
-                  token: "C91IP_u2nTuGVzh8m0XasZVoBkGba5wWY9ufazR+hnsZ+voYA=",
+                  token: "C91IP_Cp41xN9mheAggbwuP6aUpIGAiRa8Ohtio4IfKrN+RZc=",
                 },
                 type: "C91_CARD_SET_PARAMS",
               };
@@ -76,7 +62,7 @@
           }
         </script>
         <iframe
-          src="http://localhost:3000/view-card?templateId=indianGC&platform=ios"
+          src="http://localhost:3000/view-card?templateId=IOB&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>
