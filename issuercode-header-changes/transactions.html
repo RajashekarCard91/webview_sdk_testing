@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>card91</title>
+    <style>
+      iframe {
+        height: 1200px;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body style="background-color: #f4f4f4">
+    <script>
+      window.addEventListener(
+        "message",
+        (e) => {
+          // console.log("e,", e);
+          if (e.data.type === "C91_TXN_SCREEN_INITIALISED") {
+            txnPage();
+          }
+        },
+        false
+      );
+
+      function txnPage() {
+        try {
+          var ORIGIN = "http://localhost:3000";
+          var params = {
+            payload: {
+              cardId: "251215073832454ID1CARD3145999",
+              token: "C91IP_J05JXEgKt3+HK0pjZBS2z3jfHgEfzE/Kkj32Se8yb34=",
+              cardHolderName: "jkasbf",
+              customerId: "251119062818642ID1CUSTID8900050",
+              phoneNumber: "919492975424",
+              last4digits: "6362",
+              organization: "Fashion Fiesta",
+              supportMailId: "support@gmail.com",
+              issuerCode: "IOB",
+            },
+            type: "C91_TXN_SET_PARAMS",
+          };
+          document
+            .getElementById("txnPage")
+            .contentWindow.postMessage(JSON.stringify(params), ORIGIN);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    </script>
+    <iframe
+      src="http://localhost:3000/transactions?templateId=orbit&platform=ios"
+      frameborder="0"
+      allow="midi"
+      id="txnPage"
+    ></iframe>
+  </body>
+</html>

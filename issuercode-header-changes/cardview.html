@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,18 +8,19 @@
     <style>
       .container {
         position: relative;
-        background: url("./cook_card.png") no-repeat;
-        /* background-color: black; */
-        background-size: 246px 397px;
-        height: 397px;
-        width: 246px;
-        /* background-color: gray; */
+        /* background: url("./IOB_card_2.png") no-repeat; */
+        background-color: rgb(162, 106, 38);
+        background-size: 328px 208px;
+        height: 208px;
+        width: 328px;
       }
+
       .cardWrapper {
-        height: 397px;
-        width: 246px;
+        height: 208px;
+        width: 328px;
         background: transparent;
       }
+
       iframe {
         height: 100%;
         width: 100%;
@@ -38,23 +39,19 @@
                 cardView();
               }
             },
-            false,
+            false
           );
           function cardView() {
             try {
               var ORIGIN = "http://localhost:3000";
               var params = {
                 payload: {
-                  // cardHolderName: "Pratiksha Mishra",
-                  // cardId: "250325085631911ID1CARD4804178",
-                  // customerId: "220520103240749ID1CUSTID6564980",
-                  // last4digits: "9055",
-                  // token: "C91IP_UFyoUBb5uGAjWRhwh8zxnO9DuBQsX3oXTr+UGrcB8Vg=",
                   cardHolderName: "jkasbf",
                   cardId: "251215073832454ID1CARD3145999",
                   customerId: "251119062818642ID1CUSTID8900050",
                   last4digits: "6362",
-                  token: "C91IP_HvVb52KgkRTBa/CxJp+jiaBv/EyQUOz4qRCL78/yKLc=",
+                  token: "C91IP_J05JXEgKt3+HK0pjZBS2z3jfHgEfzE/Kkj32Se8yb34=", // 9492975424
+                  issuerCode: "IOB",
                 },
                 type: "C91_CARD_SET_PARAMS",
               };
@@ -67,7 +64,7 @@
           }
         </script>
         <iframe
-          src="http://localhost:3000/view-card?templateId=thomasCook&platform=ios"
+          src="http://localhost:3000/view-card?templateId=xoltt&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>

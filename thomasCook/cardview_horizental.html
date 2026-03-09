@@ -8,18 +8,20 @@
     <style>
       .container {
         position: relative;
-        background: url("./cook_card.png") no-repeat;
-        /* background-color: black; */
-        background-size: 246px 397px;
-        height: 397px;
-        width: 246px;
-        /* background-color: gray; */
+        /* background: url("./cook_horizental_card_1.png") no-repeat; */
+        background-size: 328px 208px;
+        height: 208px;
+        width: 328px;
+        border: 1px solid black;
+        background-color: gray;
       }
+
       .cardWrapper {
-        height: 397px;
-        width: 246px;
+        height: 208px;
+        width: 328px;
         background: transparent;
       }
+
       iframe {
         height: 100%;
         width: 100%;
@@ -33,7 +35,7 @@
           window.addEventListener(
             "message",
             (e) => {
-              // console.log("e,", e);
+              console.log("e,", e);
               if (e.data.type === "C91_CARD_VIEWER_INITIALISED") {
                 cardView();
               }
@@ -45,11 +47,6 @@
               var ORIGIN = "http://localhost:3000";
               var params = {
                 payload: {
-                  // cardHolderName: "Pratiksha Mishra",
-                  // cardId: "250325085631911ID1CARD4804178",
-                  // customerId: "220520103240749ID1CUSTID6564980",
-                  // last4digits: "9055",
-                  // token: "C91IP_UFyoUBb5uGAjWRhwh8zxnO9DuBQsX3oXTr+UGrcB8Vg=",
                   cardHolderName: "jkasbf",
                   cardId: "251215073832454ID1CARD3145999",
                   customerId: "251119062818642ID1CUSTID8900050",
@@ -67,7 +64,7 @@
           }
         </script>
         <iframe
-          src="http://localhost:3000/view-card?templateId=thomasCook&platform=ios"
+          src="http://localhost:3000/view-card?templateId=thomasCookHorizontal&platform=ios"
           frameborder="0"
           id="cardView"
         ></iframe>
