@@ -8,4 +8,4 @@ export const SDK_ENVIRONMENT = {
   local: "http://localhost:3000",
 };
 
-// this is an test commit...
+// this is an test commit
