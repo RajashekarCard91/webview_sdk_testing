@@ -15,9 +15,9 @@ function request(options, body = null) {
       res.on("data", (chunk) => (data += chunk));
       res.on("end", () => {
         try {
-          resolve(JSON.parse(data));
+          resolve({ status: res.statusCode, body: JSON.parse(data) });
         } catch {
-          resolve(data);
+          resolve({ status: res.statusCode, body: data });
         }
       });
     });
@@ -28,8 +28,9 @@ function request(options, body = null) {
 }
 
 async function getPRDiff() {
-  console.log(`Fetching PR #${PR_NUMBER} diff...`);
-  const files = await request({
+  console.log(`\n── Fetching PR #${PR_NUMBER} diff...`);
+
+  const res = await request({
     hostname: "api.github.com",
     path: `/repos/${OWNER}/${REPO_NAME}/pulls/${PR_NUMBER}/files`,
     headers: {
@@ -38,39 +39,79 @@ async function getPRDiff() {
       "User-Agent": "claude-pr-review-agent",
     },
   });
+
+  // Log status for debugging
+  console.log(`GitHub API status: ${res.status}`);
+
+  if (res.status !== 200) {
+    throw new Error(
+      `GitHub API error ${res.status}: ${JSON.stringify(res.body)}`,
+    );
+  }
+
+  const files = res.body;
+
+  if (!Array.isArray(files)) {
+    throw new Error(`Expected array of files, got: ${JSON.stringify(files)}`);
+  }
+
+  console.log(`Files changed: ${files.length}`);
+  files.forEach((f) =>
+    console.log(`  - ${f.filename} (+${f.additions} -${f.deletions})`),
+  );
+
+  // Build diff — cap each file patch to 3000 chars to stay within token limits
   const diffText = files
     .map(
       (f) =>
-        `### File: ${f.filename}\n\`\`\`diff\n${f.patch || "(no patch)"}\n\`\`\``,
+        `### File: ${f.filename} (${f.status})\n` +
+        `+${f.additions} additions, -${f.deletions} deletions\n\n` +
+        "```diff\n" +
+        (f.patch || "(binary or no patch)").slice(0, 3000) +
+        "\n```",
     )
     .join("\n\n---\n\n");
+
   return { files, diffText };
 }
 
 async function reviewWithClaude(diffText) {
-  console.log("Sending to Claude...");
+  console.log("\n── Sending diff to Claude...");
+
   const body = {
     model: "claude-sonnet-4-6",
-    max_tokens: 4096,
+    max_tokens: 2048,
     system: `You are an expert code reviewer for Java and JavaScript projects.
-Review the PR diff and return ONLY this JSON — no extra text:
+Review the PR diff carefully and return ONLY valid JSON — absolutely no extra text, no markdown fences, no explanation outside the JSON.
+
+Return exactly this structure:
 {
-  "summary": "2-3 sentence assessment",
-  "verdict": "APPROVE" or "COMMENT" or "REQUEST_CHANGES",
+  "summary": "2-3 sentence overall assessment of the PR",
+  "verdict": "APPROVE",
   "issues": [
     {
       "file": "path/to/file.js",
       "line": 10,
-      "severity": "critical" or "warning" or "suggestion",
+      "severity": "critical",
       "comment": "What is wrong and how to fix it"
     }
   ]
-}`,
-    messages: [{ role: "user", content: `Review this diff:\n\n${diffText}` }],
+}
+
+verdict must be exactly one of: APPROVE, COMMENT, REQUEST_CHANGES
+severity must be exactly one of: critical, warning, suggestion
+issues can be an empty array [] if no problems found.`,
+    messages: [
+      {
+        role: "user",
+        content: `Review this PR diff and return only JSON:\n\n${diffText}`,
+      },
+    ],
   };
 
   const bodyStr = JSON.stringify(body);
-  const response = await request(
+
+  const res = await request(
     {
       hostname: "api.anthropic.com",
       path: "/v1/messages",
@@ -85,29 +126,80 @@ Review the PR diff and return ONLY this JSON — no extra text:
     body,
   );
 
-  const text = response.content[0].text
-    .trim()
-    .replace(/^```json\n?/, "")
-    .replace(/\n?```$/, "");
-  return JSON.parse(text);
+  // ── KEY FIX: log full API response before touching it ──
+  console.log(`Anthropic API status: ${res.status}`);
+  console.log(`Anthropic API response: ${JSON.stringify(res.body, null, 2)}`);
+
+  if (res.status !== 200) {
+    throw new Error(
+      `Anthropic API error ${res.status}: ${JSON.stringify(res.body)}`,
+    );
+  }
+
+  if (!res.body.content || !res.body.content[0]) {
+    throw new Error(
+      `Unexpected Anthropic response shape: ${JSON.stringify(res.body)}`,
+    );
+  }
+
+  const rawText = res.body.content[0].text.trim();
+  console.log(`\nClaude raw response:\n${rawText}`);
+
+  // Strip markdown fences if present
+  const clean = rawText
+    .replace(/^```json\s*/i, "")
+    .replace(/^```\s*/i, "")
+    .replace(/\s*```$/i, "")
+    .trim();
+
+  let review;
+  try {
+    review = JSON.parse(clean);
+  } catch (e) {
+    throw new Error(
+      `Claude returned invalid JSON:\n${clean}\n\nParse error: ${e.message}`,
+    );
+  }
+
+  // Validate and set safe defaults
+  if (
+    !review.verdict ||
+    !["APPROVE", "COMMENT", "REQUEST_CHANGES"].includes(review.verdict)
+  ) {
+    review.verdict = "COMMENT";
+  }
+  if (!Array.isArray(review.issues)) {
+    review.issues = [];
+  }
+  if (!review.summary) {
+    review.summary = "Review completed.";
+  }
+
+  return review;
 }
 
 async function postReview(review) {
+  console.log(
+    `\n── Posting review (verdict: ${review.verdict}, issues: ${review.issues.length})...`,
+  );
+
   const emoji = { critical: "🔴", warning: "🟡", suggestion: "🔵" };
-  const issueList = review.issues
+
+  const issueLines = review.issues
     .map(
       (i) =>
         `${emoji[i.severity] || "•"} **${i.file}** line ${i.line}: ${i.comment}`,
     )
     .join("\n\n");
 
-  const body =
-    `## 🤖 Claude AI Code Review\n\n${review.summary}\n\n` +
+  const bodyText =
+    `## 🤖 Claude AI Code Review\n\n` +
+    `${review.summary}\n\n` +
     (review.issues.length > 0
-      ? `### Issues (${review.issues.length})\n\n${issueList}`
-      : "### ✅ No issues found — looks good!");
+      ? `### Issues found (${review.issues.length})\n\n${issueLines}`
+      : `### ✅ Looks good — no issues found!`);
 
-  await request(
+  const res = await request(
     {
       hostname: "api.github.com",
       path: `/repos/${OWNER}/${REPO_NAME}/pulls/${PR_NUMBER}/reviews`,
@@ -119,20 +211,38 @@ async function postReview(review) {
         "User-Agent": "claude-pr-review-agent",
       },
     },
-    { body, event: review.verdict },
+    {
+      body: bodyText,
+      event: review.verdict,
+    },
   );
 
-  console.log(`Review posted — verdict: ${review.verdict}`);
+  console.log(`GitHub review post status: ${res.status}`);
+
+  if (res.status !== 200) {
+    throw new Error(`Failed to post review: ${JSON.stringify(res.body)}`);
+  }
+
+  console.log("✅ Review posted successfully!");
 }
 
 async function main() {
+  console.log("═══════════════════════════════════════");
+  console.log("  Claude PR Review Agent");
+  console.log(`  Repo   : ${REPO}`);
+  console.log(`  PR     : #${PR_NUMBER}`);
+  console.log(`  Commit : ${COMMIT_SHA}`);
+  console.log("═══════════════════════════════════════");
+
   const { diffText } = await getPRDiff();
   const review = await reviewWithClaude(diffText);
   await postReview(review);
-  console.log("Done!");
+
+  console.log("\n✅ Done!");
 }
 
 main().catch((err) => {
-  console.error(err);
+  console.error("\n❌ Agent failed:");
+  console.error(err.message);
   process.exit(1);
 });
